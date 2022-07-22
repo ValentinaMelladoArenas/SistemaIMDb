@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import cl.talentoDigital.model.Usuario;
 
+
 public interface IUsuarioRepository extends CrudRepository<Usuario, Long> {
 
 	@Query("FROM Usuario WHERE email like %?1%")

@@ -19,6 +19,7 @@ public class Rating {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")//clave foránea y nombre del atributo de la tabla de referencia
+
 	private Usuario usuario;
 	@ManyToOne
 	@JoinColumn(name = "show_id", referencedColumnName = "id")
@@ -28,7 +29,9 @@ public class Rating {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	public Rating(Long id, int rating, Usuario usuario, Show show) {
+
 		super();
 		this.id = id;
 		this.rating = rating;
@@ -53,6 +56,11 @@ public class Rating {
 	}
 
 	public Usuario getUser() {
+		return usuario;
+	}
+
+	public Usuario setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 		return usuario;
 	}
 
