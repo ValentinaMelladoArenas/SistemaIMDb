@@ -6,7 +6,7 @@ import cl.talentoDigital.model.Usuario;
 
 public interface IUsuarioService{
 
-	public void add(Usuario usuario);
+	public void save(Usuario usuario);
 	public List<Usuario> findAll();
 	public List<Usuario> findByEmail(String email);
 }
