@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 @SequenceGenerator(name="SQ_USER", initialValue=1, allocationSize=1)
-public class User implements Serializable{
+public class Usuario implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="SQ_USER")
@@ -21,11 +21,11 @@ public class User implements Serializable{
 	private String passwordConfirmation;
 	private Role role;
 
-	public User() {
+	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(Long id, String userName, String email, String password, String passwordConfirmation, Role role) {
+	public Usuario(Long id, String userName, String email, String password, String passwordConfirmation, Role role) {
 		super();
 		this.id = id;
 		this.userName = userName;
