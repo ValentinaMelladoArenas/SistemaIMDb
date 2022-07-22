@@ -4,9 +4,9 @@ import java.util.List;
 
 import cl.talentoDigital.model.Usuario;
 
-public interface IUserService{
+public interface IUsuarioService{
 
-	public void add(Usuario user);
+	public void add(Usuario usuario);
 	public List<Usuario> findAll();
 	public List<Usuario> findByEmail(String email);
 }
