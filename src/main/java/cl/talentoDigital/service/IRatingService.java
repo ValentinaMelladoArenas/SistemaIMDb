@@ -6,6 +6,6 @@ import cl.talentoDigital.model.Rating;
 
 public interface IRatingService {
 
-	public void save(int rating);
+	public void save(Rating rating);
 	public List<Rating> findAll();
 }

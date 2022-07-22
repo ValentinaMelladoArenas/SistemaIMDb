@@ -2,26 +2,31 @@ package cl.talentoDigital.service;
 
 import java.util.List;
 
-import cl.talentoDigital.model.Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import cl.talentoDigital.model.Usuario;
+import cl.talentoDigital.repository.IUsuarioRepository;
+
+@Service
 public class UsuarioServiceImplement implements IUsuarioService {
 
+	@Autowired
+	IUsuarioRepository dao;
+	
 	@Override
 	public void save(Usuario usuario) {
-		// TODO Auto-generated method stub
-
+		dao.save(usuario);
 	}
 
 	@Override
 	public List<Usuario> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<Usuario>) dao.findAll();
 	}
 
 	@Override
 	public List<Usuario> findByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<Usuario>) dao.findByEmail(email);
 	}
 
 }

@@ -15,14 +15,13 @@ public class RatingServiceImplement implements IRatingService {
 	IRatingRepository dao;
 	
 	@Override
-	public void save(String rating) {
+	public void save(Rating rating) {
 		dao.save(rating);
 	}
 
 	@Override
 	public List<Rating> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<Rating>) dao.findAll();
 	}
 
 }

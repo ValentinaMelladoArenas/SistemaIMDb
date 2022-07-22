@@ -17,7 +17,6 @@ public class ShowServiceImplement implements IShowService {
 	@Override
 	public void save(Show show) {
 		dao.save(show);
-
 	}
 
 	@Override
