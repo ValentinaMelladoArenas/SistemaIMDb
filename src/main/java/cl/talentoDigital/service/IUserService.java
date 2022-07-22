@@ -2,11 +2,11 @@ package cl.talentoDigital.service;
 
 import java.util.List;
 
-import cl.talentoDigital.model.User;
+import cl.talentoDigital.model.Usuario;
 
 public interface IUserService{
 
-	public void add(User user);
-	public List<User> findAll();
-	public List<User> findByEmail(String email);
+	public void add(Usuario user);
+	public List<Usuario> findAll();
+	public List<Usuario> findByEmail(String email);
 }
