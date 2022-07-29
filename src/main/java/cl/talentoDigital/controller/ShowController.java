@@ -96,4 +96,10 @@ public class ShowController {
 		ratingService.update(editRatingView);
 		return new RedirectView("/show/selectedShow");
 	}
+	
+	@PostMapping("/buscar")
+	public String findByName(Model model, @RequestParam String nombre) {
+		showService.findByName(nombre);
+		return "home";
+	}
 }
