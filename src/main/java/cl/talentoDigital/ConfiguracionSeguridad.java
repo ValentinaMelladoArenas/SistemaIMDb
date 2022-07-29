@@ -32,15 +32,17 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// creamos en memoria un usuario con user:PepeAdmin y contraseña :1234 y le
 		// dimos el rol de administrador
-		auth.inMemoryAuthentication().withUser("afk").password(passwordEncoder().encode("1234"))
-				.roles("USER");//.and().withUser("PabloUser").password(passwordEncoder().encode("1234")).roles("USER");
+		auth.inMemoryAuthentication().withUser("afk").password(passwordEncoder().encode("1234")).roles("USER");// .and().withUser("PabloUser").password(passwordEncoder().encode("1234")).roles("USER");
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers("/user/**").hasRole("USER").antMatchers("/login").permitAll()
+		http.csrf().disable().authorizeRequests().antMatchers("/user/**").hasRole("USER").antMatchers("/login")
+				.permitAll()
+				.and()
+				.authorizeRequests().antMatchers("/register").permitAll()
 				// la página de login debe estar libre para poder
-				// .antMatchers("/admin/**").hasRole("ADMIN")					// autentificarse
+				// .antMatchers("/admin/**").hasRole("ADMIN") // autentificarse
 				// no podemos dejarla que se acceda solo estando autentificado
 				.anyRequest().authenticated()// todas las otras rutas se tiene que acceder estando autentificado
 
@@ -48,10 +50,11 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
 				.failureUrl("/login?error=true")// configuramos la página de login
 												// y la de error personalizadas
 				.usernameParameter("email").passwordParameter("contrasena")
-				
-				// Lo desactivé para que pasara a admin / user .defaultSuccessUrl("/user")// sitio de
-																										// exito al
-																										// pasar logeado
+
+				// Lo desactivé para que pasara a admin / user .defaultSuccessUrl("/user")//
+				// sitio de
+				// exito al
+				// pasar logeado
 				.and().exceptionHandling().accessDeniedPage("/error/403");
 	}
 

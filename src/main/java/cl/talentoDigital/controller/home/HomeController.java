@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 public class HomeController {
-	@GetMapping("/user")
+	@GetMapping("/userss")
 	public ModelAndView home(HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView("user/home");
 	//	modelAndView.addObject("detalle", new DetalleDTO());
