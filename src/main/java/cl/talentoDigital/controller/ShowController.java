@@ -57,6 +57,14 @@ public class ShowController {
 		return new RedirectView("/show/shows");
 	}
 	
+	@GetMapping("/deleteShow")
+	public RedirectView deleteShow(Model model, @RequestParam Long idShow, @ModelAttribute Show deleteShowView) {
+		model.addAttribute("show", new Show());
+		showService.findById(idShow);
+		showService.delete(deleteShowView);
+		return new RedirectView("/show/shows");
+	}
+	
 	@GetMapping("/newRating")
 	public String ratingShow(Model model) {
 		model.addAttribute("rating", new Rating());
@@ -67,14 +75,25 @@ public class ShowController {
 	@PostMapping("/saveRating")
 	public RedirectView saveRating(Model model, @ModelAttribute Rating ratingView) {
 		ratingService.save(ratingView);
-		return new RedirectView("/show/selectShow"); //sólo guarda el rating y lo manda a la vista selectedShow
+		return new RedirectView("/show/selectedShow"); //sólo guarda el rating y lo manda a la vista selectedShow
 	}
 	
 	@GetMapping("/selectedShow")
 	public String ratingsList(Model model) {
 		model.addAttribute("ratingsList", ratingService.findAll());
-		return "selectedShow"; //muestra el show seleccionado muy anteriormente (en newRating) con todos los ranking asignados por usuarios diferentes
+		return "selectedShow"; //muestra el show seleccionado muy anteriormente (en newRating) con todos los ratingssss asignados por usuarios diferentes
 	}
 	
+	@GetMapping("/editRating")
+	public String editRatingView(Model model, @RequestParam Long idRating) {
+		model.addAttribute("rating", new Rating());
+		ratingService.findById(idRating);
+		return "editRating";
+	}
 	
+	@PostMapping("/editRating")
+	public RedirectView editRating(Model model, @ModelAttribute Rating editRatingView) {
+		ratingService.update(editRatingView);
+		return new RedirectView("/show/selectedShow");
+	}
 }
