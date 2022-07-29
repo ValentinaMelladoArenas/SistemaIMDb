@@ -17,7 +17,6 @@ public class Show {
 	private String showNetwork;
 	
 	public Show() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Show(Long id, String showTitle, String showNetwork) {

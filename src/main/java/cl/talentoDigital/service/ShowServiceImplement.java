@@ -29,4 +29,19 @@ public class ShowServiceImplement implements IShowService {
 		return (List<Show>) dao.findAll();
 	}
 
+	@Override
+	public List<Show> findByName(String showName) {
+		return (List<Show>) dao.findByNameLike(showName);
+	}
+
+	@Override
+	public void update(Show show) {
+		dao.save(show);
+	}
+
+	@Override
+	public void findById(Long idShow) {
+		dao.findById(idShow);
+	}
+
 }

@@ -25,8 +25,23 @@ public class UsuarioServiceImplement implements IUsuarioService {
 	}
 
 	@Override
-	public List<Usuario> findByEmail(String email) {
-		return (List<Usuario>) dao.findByEmail(email);
+	public void update(Usuario usuario) {
+		dao.save(usuario);
+	}
+
+	@Override
+	public void delete(Usuario usuario) {
+		dao.delete(usuario);
+	}
+
+	@Override
+	public void findById(Long idUsuario) {
+		dao.findById(idUsuario);
+	}
+
+	@Override
+	public List<Usuario> findByEmailLike(String email) {
+		return (List<Usuario>) dao.findByEmailLike(email);
 	}
 
 }

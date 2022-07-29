@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import cl.talentoDigital.model.Rating;
@@ -41,6 +42,19 @@ public class ShowController {
 		model.addAttribute("showsList", showService.findAll());
 		return "shows"; /*vista del listado de TODOS los shows (c/ nombre de c/ show debe ser un botón que te lleve a la vista ratingShow)
 		con un botón al lado de la columna network donde diga editar y permita editar nombre y network*/
+	}
+	
+	@GetMapping("/editShow")
+	public String editShowView(Model model, @RequestParam Long idShow) {
+		model.addAttribute("show", new Show());
+		showService.findById(idShow);
+		return "editShow";
+	}
+	
+	@PostMapping("/editShow")
+	public RedirectView editShow(Model mode, @ModelAttribute Show editShowView) {
+		showService.update(editShowView);
+		return new RedirectView("/show/shows");
 	}
 	
 	@GetMapping("/newRating")

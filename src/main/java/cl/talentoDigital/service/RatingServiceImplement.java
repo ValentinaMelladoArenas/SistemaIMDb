@@ -24,4 +24,14 @@ public class RatingServiceImplement implements IRatingService {
 		return (List<Rating>) dao.findAll();
 	}
 
+	@Override
+	public void update(Rating rating) {
+		dao.save(rating);
+	}
+
+	@Override
+	public void findById(Long idRating) {
+		dao.findById(idRating);
+	}
+
 }
