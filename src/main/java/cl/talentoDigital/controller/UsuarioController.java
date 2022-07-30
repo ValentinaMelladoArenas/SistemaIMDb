@@ -14,44 +14,50 @@ import cl.talentoDigital.model.Usuario;
 import cl.talentoDigital.service.IUsuarioService;
 
 @Controller
-@RequestMapping("/usuario")
+@RequestMapping("")
 public class UsuarioController {
 
 	@Autowired
 	IUsuarioService usuarioService;
 	
-	@GetMapping("/newUsuario")
+	@GetMapping({"","/"})
+	public String starter() {
+		
+	return "login";	
+	}
+	
+	@GetMapping("/usuario/newUsuario")
 	public String addUsuario(Model model) {
 		model.addAttribute("usuario", new Usuario());
 		return "newUsuario";
 	}
 	
-	@PostMapping("/saveUsuario")
+	@PostMapping("/usuario/saveUsuario")
 	public RedirectView saveUsuario(Model model, @ModelAttribute Usuario usuarioView) {
 		usuarioService.save(usuarioView);
 		return new RedirectView("/usuario/usuarios");
 	}
 	
-	@GetMapping("/usuarios")
+	@GetMapping("/usuario/usuarios")
 	public String usuarios(Model model) {
 		model.addAttribute("usuariosList", usuarioService.findAll());
 		return "usuarios";
 	}
 	
-	@GetMapping("/editUsuario")
+	@GetMapping("/usuario/editUsuario")
 	public String editUsuarioView(Model model, @RequestParam Long idUsuario) {
 		model.addAttribute("usuario", new Usuario());
 		usuarioService.findById(idUsuario);
 		return "editUsuario";
 	}
 	
-	@PostMapping("/editUsuario")
+	@PostMapping("/usuario/editUsuario")
 	public RedirectView editUsuario(Model mode, @ModelAttribute Usuario editUsuarioView) {
 		usuarioService.update(editUsuarioView);
 		return new RedirectView("/usuario/usuarios");
 	}
 	
-	@GetMapping("/deleteUsuario")
+	@GetMapping("/usuario/deleteUsuario")
 	public RedirectView deleteUsuario(Model model, @RequestParam Long idUsuario, @ModelAttribute Usuario deleteUsuarioView) {
 		model.addAttribute("usuario", new Usuario());
 		usuarioService.findById(idUsuario);
@@ -59,7 +65,7 @@ public class UsuarioController {
 		return new RedirectView("/usuario/usuarios");
 	}
 	
-	@PostMapping("/buscar")
+	@PostMapping("/usuario/buscar")
 	public String findByEmail(Model model, @RequestParam String email) {
 		usuarioService.findByEmailLike(email);
 		return "home";

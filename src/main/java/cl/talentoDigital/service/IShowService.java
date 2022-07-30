@@ -7,7 +7,7 @@ import cl.talentoDigital.model.Show;
 public interface IShowService {
 
 	public List<Show> findAll();
-	public List<Show> findByName(String showName);
+	public List<Show> findByShowTitle(String showTitle);
 	public void save(Show show);
 	public void delete(Show show);
 	public void update(Show show);

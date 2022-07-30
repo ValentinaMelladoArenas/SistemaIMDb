@@ -30,8 +30,8 @@ public class ShowServiceImplement implements IShowService {
 	}
 
 	@Override
-	public List<Show> findByName(String showName) {
-		return (List<Show>) dao.findByNameLike(showName);
+	public List<Show> findByShowTitle(String showTitle) {
+		return (List<Show>) dao.findByShowTitleLike(showTitle);
 	}
 
 	@Override

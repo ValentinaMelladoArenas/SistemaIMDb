@@ -8,5 +8,5 @@ import cl.talentoDigital.model.Show;
 
 public interface IShowRepository extends CrudRepository<Show, Long> {
 
-	List<Show> findByNameLike(String showName);
+	List<Show> findByShowTitleLike(String showTitle);
 }

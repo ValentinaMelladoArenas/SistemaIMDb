@@ -99,7 +99,7 @@ public class ShowController {
 	
 	@PostMapping("/buscar")
 	public String findByName(Model model, @RequestParam String nombre) {
-		showService.findByName(nombre);
+		showService.findByShowTitle(nombre);
 		return "home";
 	}
 }
