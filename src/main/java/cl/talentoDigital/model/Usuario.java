@@ -6,8 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+<<<<<<< HEAD
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+=======
+>>>>>>> parent of 4cd1fdd (Cambios en models)
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -21,18 +24,24 @@ public class Usuario implements Serializable{
 	private String email;
 	private String password;
 	private String passwordConfirmation;
+<<<<<<< HEAD
 	
 	@ManyToOne
 	@JoinColumn(name = "role_id", referencedColumnName = "id")
+=======
+>>>>>>> parent of 4cd1fdd (Cambios en models)
 	private Role role;
 
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}
 
+<<<<<<< HEAD
 	public Usuario(Long id, String userName, String email, String password, String passwordConfirmation, Role role) {
+=======
+	public Usuario(String userName, String email, String password, String passwordConfirmation, Role role) {
+>>>>>>> parent of 4cd1fdd (Cambios en models)
 		super();
-		this.id = id;
 		this.userName = userName;
 		this.email = email;
 		this.password = password;
@@ -90,7 +99,11 @@ public class Usuario implements Serializable{
 
 	@Override
 	public String toString() {
+<<<<<<< HEAD
 		return "Usuario [id=" + id + ", userName=" + userName + ", email=" + email + ", password=" + password
+=======
+		return "User [id=" + id + ", userName=" + userName + ", email=" + email + ", password=" + password
+>>>>>>> parent of 4cd1fdd (Cambios en models)
 				+ ", passwordConfirmation=" + passwordConfirmation + ", role=" + role + "]";
 	}
 }

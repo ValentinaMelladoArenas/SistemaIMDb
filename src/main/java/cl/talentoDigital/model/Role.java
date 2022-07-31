@@ -1,5 +1,6 @@
 package cl.talentoDigital.model;
 
+<<<<<<< HEAD
 import java.io.Serializable;
 import java.util.List;
 
@@ -61,4 +62,8 @@ public class Role implements Serializable{
 	public String toString() {
 		return "Role [id=" + id + ", name=" + name + ", usuarios=" + usuarios + "]";
 	}
+=======
+public enum Role {
+	USER,ADMIN
+>>>>>>> parent of 4cd1fdd (Cambios en models)
 }
