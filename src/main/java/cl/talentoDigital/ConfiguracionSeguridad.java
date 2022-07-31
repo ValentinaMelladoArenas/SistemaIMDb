@@ -37,10 +37,10 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers("/user/**").hasRole("USER").antMatchers("/login")
-				.permitAll()
+		http.csrf().disable().authorizeRequests().antMatchers("usuario/new/**").permitAll()
 				.and()
-				.authorizeRequests().antMatchers("/register").permitAll()
+				.authorizeRequests().antMatchers("/usuario/logged/**").hasRole("USER")
+				.antMatchers("/login").permitAll()
 				// la página de login debe estar libre para poder
 				// .antMatchers("/admin/**").hasRole("ADMIN") // autentificarse
 				// no podemos dejarla que se acceda solo estando autentificado
@@ -56,6 +56,8 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
 				// exito al
 				// pasar logeado
 				.and().exceptionHandling().accessDeniedPage("/error/403");
+		
+		
 	}
 
 }

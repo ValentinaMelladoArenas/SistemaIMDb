@@ -14,7 +14,7 @@ import cl.talentoDigital.model.Usuario;
 import cl.talentoDigital.service.IUsuarioService;
 
 @Controller
-@RequestMapping("")
+@RequestMapping("usuario")
 public class UsuarioController {
 
 	@Autowired
@@ -26,38 +26,38 @@ public class UsuarioController {
 	return "login";	
 	}
 	
-	@GetMapping("/usuario/newUsuario")
+	@GetMapping("/new/newUsuario")
 	public String addUsuario(Model model) {
 		model.addAttribute("usuario", new Usuario());
-		return "newUsuario";
+		return "/usuario/new/newUsuario";
 	}
 	
-	@PostMapping("/usuario/saveUsuario")
+	@PostMapping("/new/saveUsuario")
 	public RedirectView saveUsuario(Model model, @ModelAttribute Usuario usuarioView) {
 		usuarioService.save(usuarioView);
-		return new RedirectView("/usuario/usuarios");
+		return new RedirectView("/usuario/logged/usuarios");
 	}
 	
-	@GetMapping("/usuario/usuarios")
+	@GetMapping("/logged/usuarios")
 	public String usuarios(Model model) {
 		model.addAttribute("usuariosList", usuarioService.findAll());
-		return "usuarios";
+		return "/usuario/logged/usuarios";
 	}
 	
-	@GetMapping("/usuario/editUsuario")
+	@GetMapping("/logged/editUsuario")
 	public String editUsuarioView(Model model, @RequestParam Long idUsuario) {
 		model.addAttribute("usuario", new Usuario());
 		usuarioService.findById(idUsuario);
 		return "editUsuario";
 	}
 	
-	@PostMapping("/usuario/editUsuario")
+	@PostMapping("/logged/editUsuario")
 	public RedirectView editUsuario(Model mode, @ModelAttribute Usuario editUsuarioView) {
 		usuarioService.update(editUsuarioView);
 		return new RedirectView("/usuario/usuarios");
 	}
 	
-	@GetMapping("/usuario/deleteUsuario")
+	@GetMapping("/logged/deleteUsuario")
 	public RedirectView deleteUsuario(Model model, @RequestParam Long idUsuario, @ModelAttribute Usuario deleteUsuarioView) {
 		model.addAttribute("usuario", new Usuario());
 		usuarioService.findById(idUsuario);
@@ -65,7 +65,7 @@ public class UsuarioController {
 		return new RedirectView("/usuario/usuarios");
 	}
 	
-	@PostMapping("/usuario/buscar")
+	@PostMapping("/logged/buscar")
 	public String findByEmail(Model model, @RequestParam String email) {
 		usuarioService.findByEmailLike(email);
 		return "home";
