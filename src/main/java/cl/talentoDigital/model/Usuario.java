@@ -1,11 +1,13 @@
 package cl.talentoDigital.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -19,19 +21,23 @@ public class Usuario implements Serializable{
 	private String email;
 	private String password;
 	private String passwordConfirmation;
-	private Role role;
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Role> roles;
 
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Usuario(String userName, String email, String password, String passwordConfirmation, Role role) {
+	public Usuario(Long id, String userName, String email, String password, String passwordConfirmation,
+			List<Role> roles) {
 		super();
+		this.id = id;
 		this.userName = userName;
 		this.email = email;
 		this.password = password;
 		this.passwordConfirmation = passwordConfirmation;
-		this.role = role;
+		this.roles = roles;
 	}
 
 	public Long getId() {
@@ -74,17 +80,17 @@ public class Usuario implements Serializable{
 		this.passwordConfirmation = passwordConfirmation;
 	}
 
-	public Role getRole() {
-		return role;
+	public List<Role> getRoles() {
+		return roles;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", email=" + email + ", password=" + password
-				+ ", passwordConfirmation=" + passwordConfirmation + ", role=" + role + "]";
+		return "Usuario [id=" + id + ", userName=" + userName + ", email=" + email + ", password=" + password
+				+ ", passwordConfirmation=" + passwordConfirmation + ", roles=" + roles + "]";
 	}
 }
