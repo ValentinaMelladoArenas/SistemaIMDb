@@ -25,9 +25,8 @@ public class Usuario implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Usuario(Long id, String userName, String email, String password, String passwordConfirmation, Role role) {
+	public Usuario(String userName, String email, String password, String passwordConfirmation, Role role) {
 		super();
-		this.id = id;
 		this.userName = userName;
 		this.email = email;
 		this.password = password;
