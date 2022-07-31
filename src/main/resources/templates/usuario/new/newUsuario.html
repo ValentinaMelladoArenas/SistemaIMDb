@@ -43,7 +43,7 @@
 					<div class="form-group py-2">
 						<label>Role</label> <select class="form-select" aria-label="Default select example" th:field="*{role}">
 							<option th:each="r : ${roles}"
-								th:value="${r}" th:text="${r}"></option>
+								th:value="${r.name}" th:text="${r.name}"></option>
 						</select>
 					</div>
 					<!-- Password -->

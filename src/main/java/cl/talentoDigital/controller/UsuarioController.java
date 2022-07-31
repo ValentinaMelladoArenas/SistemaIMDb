@@ -2,8 +2,10 @@ package cl.talentoDigital.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpSession;
 
+import cl.talentoDigital.ConfiguracionSeguridad;
 import cl.talentoDigital.model.Role;
 import cl.talentoDigital.model.Usuario;
 import cl.talentoDigital.service.IUsuarioService;
@@ -30,14 +33,23 @@ public class UsuarioController {
 	
 	@GetMapping("/new/newUsuario")
 	public String addUsuario(Model model) {
+		
 		model.addAttribute("usuario", new Usuario());
-		model.addAttribute("roles","USER");
+		model.addAttribute("roles",Role.values());
 		return "/usuario/new/newUsuario";
 	}
 	
 	@PostMapping("/new/saveUsuario")
 	public RedirectView saveUsuario(Model model, @ModelAttribute Usuario usuarioView) {
-	usuarioService.save(usuarioView);
+		
+		System.out.println("----------------------");
+		System.out.println(usuarioView.toString());
+		System.out.println("----------------------");
+		
+		
+		usuarioService.save(usuarioView);
+		
+		ConfiguracionSeguridad(authenticationSuccessHandler);
 		
 		return new RedirectView("/usuario/logged/usuarios");
 	}
@@ -48,9 +60,6 @@ public class UsuarioController {
 		session.setAttribute("usuariosList", usuarioService.findAll());
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
-		System.out.println("----------------------");
-		System.out.println(currentPrincipalName);
-		System.out.println("----------------------");
 		modelAndView.addObject("Username", currentPrincipalName);
 		session.setAttribute("username", currentPrincipalName);
 		modelAndView.addObject("info", "pelotudo");

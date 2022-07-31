@@ -3,6 +3,8 @@ package cl.talentoDigital.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +21,10 @@ public class Usuario implements Serializable{
 	private String email;
 	private String password;
 	private String passwordConfirmation;
+	
+    @Enumerated(EnumType.STRING)
 	private Role role;
+    
 
 	public Usuario() {
 		// TODO Auto-generated constructor stub

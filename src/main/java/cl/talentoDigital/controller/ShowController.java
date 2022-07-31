@@ -3,6 +3,8 @@ package cl.talentoDigital.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,9 +42,11 @@ public class ShowController {
 	}
 	
 	@GetMapping("/shows")
-	public String shows(Model model,HttpSession session) {
+	public String shows(Model model) {
 		model.addAttribute("showsList", showService.findAll());
-		model.addAttribute("username",session.getAttribute("username"));
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		model.addAttribute("Username", currentPrincipalName);
 		return "/show/shows"; /*vista del listado de TODOS los shows (c/ nombre de c/ show debe ser un botón que te lleve a la vista ratingShow)
 		con un botón al lado de la columna network donde diga editar y permita editar nombre y network*/
 	}
