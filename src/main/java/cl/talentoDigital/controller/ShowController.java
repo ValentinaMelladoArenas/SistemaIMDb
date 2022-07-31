@@ -1,5 +1,7 @@
 package cl.talentoDigital.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,9 +40,10 @@ public class ShowController {
 	}
 	
 	@GetMapping("/shows")
-	public String shows(Model model) {
+	public String shows(Model model,HttpSession session) {
 		model.addAttribute("showsList", showService.findAll());
-		return "shows"; /*vista del listado de TODOS los shows (c/ nombre de c/ show debe ser un botón que te lleve a la vista ratingShow)
+		model.addAttribute("username",session.getAttribute("username"));
+		return "/show/shows"; /*vista del listado de TODOS los shows (c/ nombre de c/ show debe ser un botón que te lleve a la vista ratingShow)
 		con un botón al lado de la columna network donde diga editar y permita editar nombre y network*/
 	}
 	

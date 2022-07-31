@@ -31,15 +31,14 @@ public class UsuarioController {
 	@GetMapping("/new/newUsuario")
 	public String addUsuario(Model model) {
 		model.addAttribute("usuario", new Usuario());
-		model.addAttribute("roles",Role.values());
+		model.addAttribute("roles","USER");
 		return "/usuario/new/newUsuario";
 	}
 	
 	@PostMapping("/new/saveUsuario")
 	public RedirectView saveUsuario(Model model, @ModelAttribute Usuario usuarioView) {
-	//	usuarioService.save(usuarioView);
+	usuarioService.save(usuarioView);
 		
-		usuarioService.save(new Usuario("p","p","pass","pass",Role.ADMIN));
 		return new RedirectView("/usuario/logged/usuarios");
 	}
 	
@@ -53,21 +52,22 @@ public class UsuarioController {
 		System.out.println(currentPrincipalName);
 		System.out.println("----------------------");
 		modelAndView.addObject("Username", currentPrincipalName);
+		session.setAttribute("username", currentPrincipalName);
 		modelAndView.addObject("info", "pelotudo");
 		return modelAndView;
 	}
 	
-	@GetMapping("/logged/usuario")
-	public String loggedUsuario(HttpSession session) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
-		System.out.println("----------------------");
-		System.out.println(currentPrincipalName);
-		System.out.println("----------------------");
-		session.setAttribute("Username", currentPrincipalName);
-		//model.addAttribute("usuariosList", usuarioService.findAll());
-		return "/usuario/logged/usuarios";
-	}
+//	@GetMapping("/logged/usuarios")
+//	public String loggedUsuarios(Model model) {
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		String currentPrincipalName = authentication.getName();
+//		System.out.println("----------------------");
+//		System.out.println(currentPrincipalName);
+//		System.out.println("----------------------");
+//		model.addAttribute("Username", currentPrincipalName);
+//		//model.addAttribute("usuariosList", usuarioService.findAll());
+//		return "/usuario/logged/usuarios";
+//	}
 	
 	@GetMapping("/logged/editUsuario")
 	public String editUsuarioView(Model model, @RequestParam Long idUsuario) {

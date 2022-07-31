@@ -26,23 +26,41 @@
 			</button>
 
 
+
+			<div class="d-flex justify-content-center " id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+					<li class="nav-item dropdown"><a
+						class="nav-link active dropdown-toggle" id="navbarDropdown"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Shows</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="/show/shows">Ver
+									Shows</a></li>
+							<li><a class="dropdown-item" href="/show/newShow">Añadir
+									Show</a></li>
+						</ul></li>
+				</ul>
+			</div>
+
+
 			<div class="d-flex justify-content-end " id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="/show/add">Add a show</a></li>
 
 
-					<li class="nav-item dropdown">
-						<a
-						class="nav-link active dropdown-toggle" id="navbarDropdown"	
-						role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${Username}"> Perfil</a>
+					<li class="nav-item dropdown"><a
+						class="nav-link active dropdown-toggle" id="navbarDropdown"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false"
+						th:text="${Username}"> Perfil</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="/usuario/logged/editUsuario">Edit</a></li>
-							<li><a class="dropdown-item" href="#">Ver Perfil</a></li>
+							<li><a class="dropdown-item"
+								href="/usuario/logged/editUsuario">Edit</a></li>
+							<li><a class="dropdown-item" href="/usuario/logged/usuario">Ver
+									Perfil</a></li>
 						</ul></li>
 
 
-					<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Cerrar sesión</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Cerrar
+							sesión</a></li>
 
 				</ul>
 
