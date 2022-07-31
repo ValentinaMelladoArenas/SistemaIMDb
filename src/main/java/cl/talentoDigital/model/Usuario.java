@@ -1,13 +1,13 @@
 package cl.talentoDigital.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -22,22 +22,22 @@ public class Usuario implements Serializable{
 	private String password;
 	private String passwordConfirmation;
 	
-	@OneToMany(mappedBy = "usuario")
-	private List<Role> roles;
+	@ManyToOne
+	@JoinColumn(name = "role_id", referencedColumnName = "id")
+	private Role role;
 
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Usuario(Long id, String userName, String email, String password, String passwordConfirmation,
-			List<Role> roles) {
+	public Usuario(Long id, String userName, String email, String password, String passwordConfirmation, Role role) {
 		super();
 		this.id = id;
 		this.userName = userName;
 		this.email = email;
 		this.password = password;
 		this.passwordConfirmation = passwordConfirmation;
-		this.roles = roles;
+		this.role = role;
 	}
 
 	public Long getId() {
@@ -80,17 +80,17 @@ public class Usuario implements Serializable{
 		this.passwordConfirmation = passwordConfirmation;
 	}
 
-	public List<Role> getRoles() {
-		return roles;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", userName=" + userName + ", email=" + email + ", password=" + password
-				+ ", passwordConfirmation=" + passwordConfirmation + ", roles=" + roles + "]";
+				+ ", passwordConfirmation=" + passwordConfirmation + ", role=" + role + "]";
 	}
 }

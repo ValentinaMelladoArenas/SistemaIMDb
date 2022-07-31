@@ -1,13 +1,13 @@
 package cl.talentoDigital.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -19,19 +19,18 @@ public class Role implements Serializable{
 	private Long id;
 	private String name;
 	
-	@ManyToOne
-	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
-	private Usuario usuario;
+	@OneToMany(mappedBy = "role")
+	private List<Usuario> usuarios;
 	
 	public Role() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Role(Long id, String name, Usuario usuario) {
+	public Role(Long id, String name, List<Usuario> usuarios) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.usuario = usuario;
+		this.usuarios = usuarios;
 	}
 
 	public Long getId() {
@@ -50,16 +49,16 @@ public class Role implements Serializable{
 		this.name = name;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public List<Usuario> getUsuarios() {
+		return usuarios;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	@Override
 	public String toString() {
-		return "Role [id=" + id + ", name=" + name + ", usuario=" + usuario + "]";
+		return "Role [id=" + id + ", name=" + name + ", usuarios=" + usuarios + "]";
 	}
 }
