@@ -25,8 +25,7 @@ public class UsuarioController {
 
 	@Autowired
 	IUsuarioService usuarioService;
-	
-	
+
 	
 	@GetMapping("/new/newUsuario")
 	public String addUsuario(Model model) {
@@ -39,11 +38,6 @@ public class UsuarioController {
 	@PostMapping("/new/saveUsuario")
 	public RedirectView saveUsuario(Model model, @ModelAttribute Usuario usuarioView) {
 		
-		System.out.println("----------------------");
-		System.out.println(usuarioView.toString());
-		System.out.println("----------------------");
-		
-		
 		usuarioService.save(usuarioView);
 		
 		
@@ -55,37 +49,30 @@ public class UsuarioController {
 	public ModelAndView usuarios(HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView("/usuario/logged/usuarios");
 		session.setAttribute("usuariosList", usuarioService.findAll());
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
-		modelAndView.addObject("Username", currentPrincipalName);
-		session.setAttribute("username", currentPrincipalName);
-		modelAndView.addObject("info", "pelotudo");
+		modelAndView.addObject("Username", userMapped());
 		return modelAndView;
 	}
 	
-//	@GetMapping("/logged/usuarios")
-//	public String loggedUsuarios(Model model) {
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		String currentPrincipalName = authentication.getName();
-//		System.out.println("----------------------");
-//		System.out.println(currentPrincipalName);
-//		System.out.println("----------------------");
-//		model.addAttribute("Username", currentPrincipalName);
-//		//model.addAttribute("usuariosList", usuarioService.findAll());
-//		return "/usuario/logged/usuarios";
-//	}
 	
 	@GetMapping("/logged/editUsuario")
-	public String editUsuarioView(Model model, @RequestParam String userName) {
-		model.addAttribute("usuario", new Usuario());
-		usuarioService.findByUsername(userName);
-		return "editUsuario";
+	public String editUsuarioView(Model model) {
+		model.addAttribute("Username", userMapped());
+		model.addAttribute("editUsuario", usuarioService.findByUsername(userMapped()).get());
+		return "usuario/logged/edit";
 	}
 	
 	@PostMapping("/logged/editUsuario")
-	public RedirectView editUsuario(Model mode, @ModelAttribute Usuario editUsuarioView) {
+	public RedirectView editUsuario(Model model, @ModelAttribute Usuario editUsuarioView) {
+		
+		
+		
+		System.out.println("aaaa");
+		System.out.println(editUsuarioView.getRole());
+		System.out.println(editUsuarioView.toString());
+		
+		
 		usuarioService.update(editUsuarioView);
-		return new RedirectView("/usuario/usuarios");
+		return new RedirectView("/show/shows");
 	}
 	
 	@GetMapping("/logged/deleteUsuario")
@@ -93,12 +80,20 @@ public class UsuarioController {
 		model.addAttribute("usuario", new Usuario());
 		usuarioService.findByUsername(userName);
 		usuarioService.delete(deleteUsuarioView);
-		return new RedirectView("/usuario/usuarios");
+		return new RedirectView("/logged/usuarios");
 	}
 	
 	@PostMapping("/logged/buscar")
 	public String findByEmail(Model model, @RequestParam String email) {
 		usuarioService.findByEmailLike(email);
-		return "home";
+		return "logged/usuarios";
+	}
+	
+	
+	// para saber que usuario esta loggeado
+	public String userMapped() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		return authentication.getName();
+		
 	}
 }

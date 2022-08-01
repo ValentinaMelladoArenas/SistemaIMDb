@@ -2,6 +2,7 @@ package cl.talentoDigital.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -94,11 +95,6 @@ public class Usuario implements Serializable{
 		this.role = role;
 	}
 
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", userName=" + userName + ", email=" + email + ", password=" + password
-				+ ", passwordConfirmation=" + passwordConfirmation + ", role=" + role + "]";
-	}
 
 	public boolean isActive() {
 		return isActive;
@@ -106,6 +102,13 @@ public class Usuario implements Serializable{
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+	
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", userName=" + userName + ", email=" + email + ", password=" + password
+				+ ", passwordConfirmation=" + passwordConfirmation + ", role=" + role + "]";
 	}
 
 

@@ -22,34 +22,52 @@
 			<section
 		class="container mt-5 py-4 bg-info bg-light col-3 border border-success rounded">
 		
-			<form th:action="@{/user/registration}" method="post" th:object="${Usuario}">
+			<form th:action="@{/usuario/logged/editUsuario}" method="post" th:object="${Usuario}" th:with="u = ${editUsuario}" >
 				
+				
+				<!-- ID -->
+				<div class="form-group py-2" >
+					<label>id</label>					
+					<input type="text"  th:value="${u.id}" class="form-control"
+						id="id" name="id" aria-describedby="claveHelp"
+						placeholder="" required>
+				</div>
 				
 				<!-- Usuario -->
-				<div class="form-group py-2">
+				<div class="form-group py-2" >
 					<label>Username</label>					
-					<input type="text" th:field="*{userName}" class="form-control"
-						id="userName" aria-describedby="claveHelp"
+					<input type="text"  th:value="${u.userName}" class="form-control"
+						id="userName" name="userName" aria-describedby="claveHelp"
 						placeholder="Ingresa tu usuario" required>
 				</div>
 				<!-- Correo -->
 				<div class="form-group py-2">
 				<label>Correo</label>
-					<input type="text" th:field="*{email}" class="form-control"
+					<input type="text" name="email" th:value="${u.email}" class="form-control"
 						id="email" aria-describedby="claveHelp"
 						placeholder="Ingresa tu usuario" required>
 				</div>
+				
+				<!-- Role -->
+				<div class="form-group py-2" >
+				<label>Role</label>
+					<input type="text" name="role"  th:value="${u.role}" class="form-control"
+						id="role" aria-describedby="claveHelp"
+						placeholder="Ingresa tu usuario" >
+				</div>
+				
+				
 				<!-- Contraseña -->
 				<div class="form-group py-2">
 				<label>Password</label>
-					<input type="text" th:field="*{password}" class="form-control"
+					<input type="text" name="password" th:value="${u.password}" class="form-control"
 						id="password" aria-describedby="claveHelp"
 						placeholder="Ingresa tu contraseña" required>
 				</div>
 				<!-- Usuario -->
 				<div class="form-group py-2">
 				<label>Password Confirmation</label>
-					<input type="text" th:field="*{passwordConfirmation}" class="form-control"
+					<input type="text" name="passwordConfirmation" th:value="${u.passwordConfirmation}" class="form-control"
 						id="passwordConfirmation" aria-describedby="claveHelp"
 						placeholder="Ingresa tu confirmación de contraseña" required>
 				</div>

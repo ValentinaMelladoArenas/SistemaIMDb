@@ -1,6 +1,6 @@
 package cl.talentoDigital.controller;
 
-import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,11 +18,15 @@ import cl.talentoDigital.model.Rating;
 import cl.talentoDigital.model.Show;
 import cl.talentoDigital.service.IRatingService;
 import cl.talentoDigital.service.IShowService;
+import cl.talentoDigital.service.IUsuarioService;
 
 @Controller
 @RequestMapping("/show")
 public class ShowController {
 
+	@Autowired
+	IUsuarioService usuarioService;
+	
 	@Autowired
 	IShowService showService;
 	
@@ -32,7 +36,8 @@ public class ShowController {
 	@GetMapping("/newShow")
 	public String addShow(Model model) {
 		model.addAttribute("show", new Show());
-		return "newShow"; //vista de la creación de los shows
+		model.addAttribute("Username",  userMapped());
+		return "show/anadir"; //vista de la creación de los shows
 	}
 	
 	@PostMapping("/saveShow")
@@ -44,9 +49,9 @@ public class ShowController {
 	@GetMapping("/shows")
 	public String shows(Model model) {
 		model.addAttribute("showsList", showService.findAll());
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
-		model.addAttribute("Username", currentPrincipalName);
+		model.addAttribute("Username",  userMapped());
+		model.addAttribute("email",  usuarioService.findByUsername(userMapped()).get().getEmail());
+		
 		return "/show/shows"; /*vista del listado de TODOS los shows (c/ nombre de c/ show debe ser un botón que te lleve a la vista ratingShow)
 		con un botón al lado de la columna network donde diga editar y permita editar nombre y network*/
 	}
@@ -108,5 +113,11 @@ public class ShowController {
 	public String findByName(Model model, @RequestParam String nombre) {
 		showService.findByShowTitle(nombre);
 		return "home";
+	}
+	
+	public String userMapped() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		return authentication.getName();
+		
 	}
 }

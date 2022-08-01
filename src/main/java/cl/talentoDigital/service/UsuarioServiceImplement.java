@@ -1,8 +1,9 @@
 package cl.talentoDigital.service;
 
-
 import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,35 +12,34 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 import cl.talentoDigital.model.Usuario;
 import cl.talentoDigital.repository.IUsuarioRepository;
 
+
 @Service
-public class UsuarioServiceImplement implements IUsuarioService, UserDetailsService  {
+public class UsuarioServiceImplement implements IUsuarioService, UserDetailsService {
 
 	@Autowired
 	IUsuarioRepository dao;
-	
-	@Autowired
-    private BCryptPasswordEncoder passwordEncoder;
 
-	
-	
-	
-	 public UsuarioServiceImplement(IUsuarioRepository userRepository) {
-	        super();
-	        this.dao = userRepository;
-	    }
-	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
+	public UsuarioServiceImplement(IUsuarioRepository userRepository) {
+		super();
+		this.dao = userRepository;
+	}
+
 	@Override
 	public void save(Usuario usuario) {
+
+		// Para guardar la contraseña encriptada segun se requiere.
 		
 		String encodedPassword = passwordEncoder.encode(usuario.getPassword());
 		
-		dao.save(new Usuario(null, usuario.getUserName(),usuario.getEmail(), 
-				encodedPassword, encodedPassword, usuario.getRole(),true)
-				);
+		dao.save(new Usuario(null, usuario.getUserName(), usuario.getEmail(), encodedPassword, encodedPassword,
+				usuario.getRole(), true));
+		
 	}
 
 	@Override
@@ -47,9 +47,14 @@ public class UsuarioServiceImplement implements IUsuarioService, UserDetailsServ
 		return (List<Usuario>) dao.findAll();
 	}
 
+	@Transactional
 	@Override
 	public void update(Usuario usuario) {
-		dao.save(usuario);
+
+		String encodedPassword = passwordEncoder.encode(usuario.getPassword());
+		
+		dao.save(new Usuario(usuario.getId(), usuario.getUserName(), usuario.getEmail(), encodedPassword, encodedPassword,
+				usuario.getRole(), true));
 	}
 
 	@Override
@@ -61,13 +66,11 @@ public class UsuarioServiceImplement implements IUsuarioService, UserDetailsServ
 	public List<Usuario> findByEmailLike(String email) {
 		return (List<Usuario>) dao.findByEmailLike(email);
 	}
-	
-
 
 	@Override
 	public Optional<Usuario> findByUsername(String username) {
 		return dao.findByUserName(username);
-		
+
 	}
 
 	@Override
@@ -79,7 +82,5 @@ public class UsuarioServiceImplement implements IUsuarioService, UserDetailsServ
 
 		return user.map(UserDetailsImpl::new).get();
 	}
-
- 
 
 }
