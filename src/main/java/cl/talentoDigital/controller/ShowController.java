@@ -61,14 +61,15 @@ public class ShowController {
 		
 		model.addAttribute("Username",  userMapped());
 		model.addAttribute("show",showService.findById(Long.parseLong(idShow)).get()); 
-		
 		return "/show/edit";
 	}
 	
 	@PostMapping("/editShow")
 	public RedirectView editShow(Model model, @ModelAttribute Show editShowView) {
-		showService.update(editShowView);
 		model.addAttribute("Username",  userMapped());
+		System.out.println(editShowView.toString());
+		//showService.update(editShowView);
+		
 		return new RedirectView("/show/shows");
 	}
 	

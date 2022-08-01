@@ -29,24 +29,23 @@
 					th:object="${show}">
 
 					<div class="form-group py-2">
-						<label>Show Network</label> <input type="text" th:field="*{id}"
-							class="form-control" name="id" id="id"
-							aria-describedby="claveHelp" placeholder="Ingresa el canal?"
-							required th:disabled="true" >
+						<label>Show Network</label> <input type="number" 
+							class="form-control" name="id" id="id"  th:field="*{id}" th:value="${show.id}"
+							 readonly >
 					</div>
 
 					<!-- Show Network -->
 					<div class="form-group py-2">
 						<label>Show Network</label> <input type="text"
 							th:field="*{showNetwork}" class="form-control" name="ShowNetwork"
-							id="ShowNetwork" aria-describedby="claveHelp"
+							id="ShowNetwork" aria-describedby="claveHelp" th:value="${show.showNetwork}"
 							placeholder="Ingresa el canal?" required>
 					</div>
 					<!-- Correo -->
 					<div class="form-group py-2">
 						<label>Show Title</label> <input type="text"
 							th:field="*{showTitle}" class="form-control" name="showTitle"
-							id="showTitle" aria-describedby="claveHelp"
+							id="showTitle" aria-describedby="claveHelp" th:value="${show.showTitle}"
 							placeholder="Ingresa el titulo del show" required>
 					</div>
 
