@@ -14,6 +14,10 @@ import javax.persistence.SequenceGenerator;
 @SequenceGenerator(name="SQ_USER", initialValue=1, allocationSize=1)
 public class Usuario implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="SQ_USER")
 	private Long id;
@@ -21,6 +25,7 @@ public class Usuario implements Serializable{
 	private String email;
 	private String password;
 	private String passwordConfirmation;
+	private boolean isActive;
 	
     @Enumerated(EnumType.STRING)
 	private Role role;
@@ -30,7 +35,7 @@ public class Usuario implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Usuario(Long id, String userName, String email, String password, String passwordConfirmation, Role role) {
+	public Usuario(Long id, String userName, String email, String password, String passwordConfirmation, Role role, boolean isActive) {
 		super();
 		this.id = id;
 		this.userName = userName;
@@ -38,6 +43,7 @@ public class Usuario implements Serializable{
 		this.password = password;
 		this.passwordConfirmation = passwordConfirmation;
 		this.role = role;
+		this.isActive = isActive;
 	}
 
 	public Long getId() {
@@ -93,4 +99,17 @@ public class Usuario implements Serializable{
 		return "Usuario [id=" + id + ", userName=" + userName + ", email=" + email + ", password=" + password
 				+ ", passwordConfirmation=" + passwordConfirmation + ", role=" + role + "]";
 	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+
+
+
+
 }

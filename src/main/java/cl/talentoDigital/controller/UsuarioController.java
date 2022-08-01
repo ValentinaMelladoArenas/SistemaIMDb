@@ -49,7 +49,7 @@ public class UsuarioController {
 		
 		usuarioService.save(usuarioView);
 		
-		ConfiguracionSeguridad(authenticationSuccessHandler);
+		
 		
 		return new RedirectView("/usuario/logged/usuarios");
 	}
@@ -79,9 +79,9 @@ public class UsuarioController {
 //	}
 	
 	@GetMapping("/logged/editUsuario")
-	public String editUsuarioView(Model model, @RequestParam Long idUsuario) {
+	public String editUsuarioView(Model model, @RequestParam String userName) {
 		model.addAttribute("usuario", new Usuario());
-		usuarioService.findById(idUsuario);
+		usuarioService.findByUsername(userName);
 		return "editUsuario";
 	}
 	
@@ -92,9 +92,9 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/logged/deleteUsuario")
-	public RedirectView deleteUsuario(Model model, @RequestParam Long idUsuario, @ModelAttribute Usuario deleteUsuarioView) {
+	public RedirectView deleteUsuario(Model model, @RequestParam String userName, @ModelAttribute Usuario deleteUsuarioView) {
 		model.addAttribute("usuario", new Usuario());
-		usuarioService.findById(idUsuario);
+		usuarioService.findByUsername(userName);
 		usuarioService.delete(deleteUsuarioView);
 		return new RedirectView("/usuario/usuarios");
 	}
