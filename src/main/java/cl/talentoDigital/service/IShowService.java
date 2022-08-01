@@ -1,6 +1,7 @@
 package cl.talentoDigital.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import cl.talentoDigital.model.Show;
 
@@ -11,5 +12,5 @@ public interface IShowService {
 	public void save(Show show);
 	public void delete(Show show);
 	public void update(Show show);
-	public void findById(Long idShow);
+	public Optional<Show> findById(Long idShow);
 }

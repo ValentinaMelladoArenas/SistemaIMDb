@@ -57,15 +57,18 @@ public class ShowController {
 	}
 	
 	@GetMapping("/editShow")
-	public String editShowView(Model model, @RequestParam Long idShow) {
-		model.addAttribute("show", new Show());
-		showService.findById(idShow);
-		return "editShow";
+	public String editShowView(Model model, @RequestParam String idShow) {
+		
+		model.addAttribute("Username",  userMapped());
+		model.addAttribute("show",showService.findById(Long.parseLong(idShow)).get()); 
+		
+		return "/show/edit";
 	}
 	
 	@PostMapping("/editShow")
-	public RedirectView editShow(Model mode, @ModelAttribute Show editShowView) {
+	public RedirectView editShow(Model model, @ModelAttribute Show editShowView) {
 		showService.update(editShowView);
+		model.addAttribute("Username",  userMapped());
 		return new RedirectView("/show/shows");
 	}
 	
@@ -74,24 +77,28 @@ public class ShowController {
 		model.addAttribute("show", new Show());
 		showService.findById(idShow);
 		showService.delete(deleteShowView);
+		model.addAttribute("Username",  userMapped());
 		return new RedirectView("/show/shows");
 	}
 	
 	@GetMapping("/newRating")
 	public String ratingShow(Model model) {
 		model.addAttribute("rating", new Rating());
+		model.addAttribute("Username",  userMapped());
 		return "ratingShow"; /*muestra el show seleccionado con el botón (nombre) y es como un edit (además del otro edit propio del show, este 
 		es un tipo edit para agregar el rating por usuario solamente) donde agregas el rating (1 al 5)*/
 	}
 	
 	@PostMapping("/saveRating")
 	public RedirectView saveRating(Model model, @ModelAttribute Rating ratingView) {
+		model.addAttribute("Username",  userMapped());
 		ratingService.save(ratingView);
 		return new RedirectView("/show/selectedShow"); //sólo guarda el rating y lo manda a la vista selectedShow
 	}
 	
 	@GetMapping("/selectedShow")
 	public String ratingsList(Model model) {
+		model.addAttribute("Username",  userMapped());
 		model.addAttribute("ratingsList", ratingService.findAll());
 		return "selectedShow"; //muestra el show seleccionado muy anteriormente (en newRating) con todos los ratingssss asignados por usuarios diferentes
 	}
@@ -99,6 +106,7 @@ public class ShowController {
 	@GetMapping("/editRating")
 	public String editRatingView(Model model, @RequestParam Long idRating) {
 		model.addAttribute("rating", new Rating());
+		model.addAttribute("Username",  userMapped());
 		ratingService.findById(idRating);
 		return "editRating";
 	}
@@ -106,12 +114,14 @@ public class ShowController {
 	@PostMapping("/editRating")
 	public RedirectView editRating(Model model, @ModelAttribute Rating editRatingView) {
 		ratingService.update(editRatingView);
+		model.addAttribute("Username",  userMapped());
 		return new RedirectView("/show/selectedShow");
 	}
 	
 	@PostMapping("/buscar")
 	public String findByName(Model model, @RequestParam String nombre) {
 		showService.findByShowTitle(nombre);
+		model.addAttribute("Username",  userMapped());
 		return "home";
 	}
 	

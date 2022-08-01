@@ -53,6 +53,13 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
+	@GetMapping("/logged/usuario")
+	public String UsuarioView(Model model) {
+		model.addAttribute("Username", userMapped());
+		model.addAttribute("viewUsuario", usuarioService.findByUsername(userMapped()).get());
+		return "usuario/logged/usuario";
+	}
+	
 	
 	@GetMapping("/logged/editUsuario")
 	public String editUsuarioView(Model model) {

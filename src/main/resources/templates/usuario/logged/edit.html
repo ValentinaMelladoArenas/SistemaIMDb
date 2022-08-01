@@ -14,20 +14,20 @@
 	
 	<nav th:insert="fragments/general.html :: nav"> </nav>
 
-	<h1>Register</h1>
-	<div class="container">
-		<div class="row">
 	
-			
+
+		<div class="row container mx-auto d-flex justify-content-center">
+
+
 			<section
-		class="container mt-5 py-4 bg-info bg-light col-3 border border-success rounded">
-		
+				class=" mt-5 py-4 bg-info bg-light col-12 col-md-8 col-xl-4 border border-success rounded">
+		<h1>Edit User</h1>
 			<form th:action="@{/usuario/logged/editUsuario}" method="post" th:object="${Usuario}" th:with="u = ${editUsuario}" >
 				
 				
 				<!-- ID -->
 				<div class="form-group py-2" >
-					<label>id</label>					
+					<label>Id</label>					
 					<input type="text"  th:value="${u.id}" class="form-control"
 						id="id" name="id" aria-describedby="claveHelp"
 						placeholder="" required>
@@ -77,10 +77,6 @@
 			</section>
 		</div>
 		
-	</div>
-
-
-
 
 
 

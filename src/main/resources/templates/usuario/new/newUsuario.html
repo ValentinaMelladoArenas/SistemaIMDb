@@ -16,13 +16,11 @@
 	<nav th:insert="fragments/loginBase.html :: nav"></nav>
 
 
-	<div class="container">
-		<div class="row">
+<div class="row container mx-auto d-flex justify-content-center">
 
 
 			<section
-				class="container mt-5 py-4 bg-info bg-light col-3 border border-success rounded">
-				<h1 class="text-center">Register</h1>
+				class=" mt-5 py-4 bg-info bg-light col-12 col-md-8 col-xl-4 border border-success rounded"><h1 class="text-center">Register</h1>
 				<form th:action="@{/usuario/new/saveUsuario}" method="post"
 					th:object="${usuario}">
 
@@ -65,7 +63,7 @@
 			</section>
 		</div>
 
-	</div>
+
 
 
 

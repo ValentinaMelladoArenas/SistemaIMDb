@@ -37,15 +37,17 @@
 			<thead>
 				<tr>
 					<th scope="col">#</th>
-					<th scope="col">Network</th>
 					<th scope="col">Title</th>
+					<th scope="col">Network</th>
+					<th scope="col">Options</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="var:${showsList}">
 					<td th:text="${varStat.index}"></td>
+					<td> <a th:text="${var.showTitle}" th:href="@{/show/editShow/(idShow=${var.id})}"></a> </td>
 					<td th:text="${var.showNetwork}"></td>
-					<td th:text="${var.showTitle}"></td>
+					<td ></td>
 					
 				<!--	<td><button type="button" class="btn btn-primary">VER</button></td> -->
 				</tr>

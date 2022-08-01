@@ -10,40 +10,50 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
+
+
 <body>
 
 
 	<nav th:insert="fragments/general.html :: nav"></nav>
 
 
-	<div class="row container mx-auto d-flex justify-content-center">
+		<div class="row container mx-auto d-flex justify-content-center">
 
 
 			<section
-				class=" mt-5 py-4 bg-info bg-light col-12 col-md-8 col-xl-4 border border-success rounded"><h1 class="text-center">Añadir Show</h1>
-				<form th:action="@{/show/saveShow}" method="post"
+				class=" mt-5 py-4 bg-info bg-light col-12 col-md-8 col-xl-4 border border-success rounded">
+				<h1 class="text-center">Editar Show</h1>
+				<form th:action="@{/show/editShow}" method="post"
 					th:object="${show}">
 
+					<div class="form-group py-2">
+						<label>Show Network</label> <input type="text" th:field="*{id}"
+							class="form-control" name="id" id="id"
+							aria-describedby="claveHelp" placeholder="Ingresa el canal?"
+							required th:disabled="true" >
+					</div>
 
 					<!-- Show Network -->
 					<div class="form-group py-2">
-						<label>Show Network</label> <input type="text" th:field="*{showNetwork}"
-							class="form-control" id="ShowNetwork" aria-describedby="claveHelp"
+						<label>Show Network</label> <input type="text"
+							th:field="*{showNetwork}" class="form-control" name="ShowNetwork"
+							id="ShowNetwork" aria-describedby="claveHelp"
 							placeholder="Ingresa el canal?" required>
 					</div>
 					<!-- Correo -->
 					<div class="form-group py-2">
-						<label>Show Title</label> <input type="text" th:field="*{showTitle}"
-							class="form-control" id="showTitle" aria-describedby="claveHelp"
+						<label>Show Title</label> <input type="text"
+							th:field="*{showTitle}" class="form-control" name="showTitle"
+							id="showTitle" aria-describedby="claveHelp"
 							placeholder="Ingresa el titulo del show" required>
 					</div>
 
-					<button type="submit" class="btn btn-primary">Añadir</button>
+					<button type="submit" class="btn btn-primary">Editar</button>
 				</form>
 			</section>
 		</div>
-
-
 
 
 

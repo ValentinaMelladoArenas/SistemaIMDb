@@ -1,6 +1,7 @@
 package cl.talentoDigital.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,8 +41,8 @@ public class ShowServiceImplement implements IShowService {
 	}
 
 	@Override
-	public void findById(Long idShow) {
-		dao.findById(idShow);
+	public Optional<Show> findById(Long idShow) {
+		return dao.findById(idShow);
 	}
 
 }
