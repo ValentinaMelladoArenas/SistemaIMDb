@@ -79,11 +79,11 @@ public class ShowController {
 	}
 	
 	@GetMapping("/ratingShow")
-	public String addRating(Model model) {
+	public String addRating(Model model, @RequestParam String idShow) {
 		model.addAttribute("rating", new Rating());
-		model.addAttribute("showsList", showService.findAll());
-		model.addAttribute("usersList", usuarioService.findAll());
-		model.addAttribute("Username",  userMapped());
+		model.addAttribute("usuario", usuarioService.findByUsername(userMapped()));
+		model.addAttribute("showId",  idShow);
+		model.addAttribute("Username", userMapped() );
 		return "/show/ratingShow"; 
 	}
 	
