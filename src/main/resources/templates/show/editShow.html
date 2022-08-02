@@ -6,7 +6,7 @@
 <!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
         </th:block> /*/-->
 
-<title>Añadir Show</title>
+<title>Editar Show</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -25,11 +25,11 @@
 			<section
 				class=" mt-5 py-4 bg-info bg-light col-12 col-md-8 col-xl-4 border border-success rounded">
 				<h1 class="text-center">Editar Show</h1>
-				<form th:action="@{/show/editShow}" method="post"
+				<form th:action="@{/show/updateShow}" method="post"
 					th:object="${show}">
 
 					<div class="form-group py-2">
-						<label>Show Network</label> <input type="number" 
+						<label>#</label> <input type="number" 
 							class="form-control" name="id" id="id"  th:field="*{id}" th:value="${show.id}"
 							 readonly >
 					</div>
@@ -39,14 +39,14 @@
 						<label>Show Network</label> <input type="text"
 							th:field="*{showNetwork}" class="form-control" name="ShowNetwork"
 							id="ShowNetwork" aria-describedby="claveHelp" th:value="${show.showNetwork}"
-							placeholder="Ingresa el canal?" required>
+							placeholder="Ingresar nueva plataforma" required>
 					</div>
 					<!-- Correo -->
 					<div class="form-group py-2">
 						<label>Show Title</label> <input type="text"
 							th:field="*{showTitle}" class="form-control" name="showTitle"
 							id="showTitle" aria-describedby="claveHelp" th:value="${show.showTitle}"
-							placeholder="Ingresa el titulo del show" required>
+							placeholder="Ingresar nuevo título" required>
 					</div>
 
 					<button type="submit" class="btn btn-primary">Editar</button>

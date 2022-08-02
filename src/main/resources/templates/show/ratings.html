@@ -37,17 +37,18 @@
 			<thead>
 				<tr>
 					<th scope="col">#</th>
-					<th scope="col">Title</th>
-					<th scope="col">Network</th>
+					<th scope="col">User</th>
+					<th scope="col">Show</th>
+					<th scope="col">Rating<th>
 					<th scope="col">Options<th>
 			</thead>
 			<tbody>
-				<tr th:each="var:${showsList}">
+				<tr th:each="var:${ratingList}">
 					<td th:text="${varStat.index}"></td>
-					<td> <a th:text="${var.showTitle}" th:href="@{/show/ratingShow/}"></a> </td>
-					<td th:text="${var.showNetwork}"></td>
-					<td><a th:text="Edit" th:href="@{/show/editShow/(idShow=${var.id})}"></a> <a th:text="Delete" th:action="@{/show/deleteShow}" method="get"
-					th:object="${show}" th:href="@{/show/deleteShow/(idShow=${var.id})}"></a></td>
+					<td th:text="${var.email}"></td>
+					<td th:text="${var.showTitle}"></td>
+					<td><button type="submit" class="btn btn-primary"><a th:href="@{/show/editRating/}"></a>Edit</button>
+					<button type="submit" class="btn btn-primary"><a th:href="@{/show/deleteRating/}"></a>Delete</button></td>
 					
 				<!--	<td><button type="button" class="btn btn-primary">VER</button></td> -->
 				</tr>

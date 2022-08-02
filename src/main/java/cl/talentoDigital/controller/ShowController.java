@@ -33,17 +33,17 @@ public class ShowController {
 	@Autowired
 	IRatingService ratingService;
 	
-	@GetMapping("/newShow")
+	@GetMapping("/addShow")
 	public String addShow(Model model) {
 		model.addAttribute("show", new Show());
 		model.addAttribute("Username",  userMapped());
-		return "show/anadir"; //vista de la creación de los shows
+		return "/show/addShow"; 
 	}
 	
 	@PostMapping("/saveShow")
 	public RedirectView saveShow(Model model, @ModelAttribute Show showView) {
 		showService.save(showView);
-		return new RedirectView("/show/shows"); //sólo guarda el show y lo manda a la vista shows 
+		return new RedirectView("/show/shows"); 
 	}
 	
 	@GetMapping("/shows")
@@ -52,23 +52,22 @@ public class ShowController {
 		model.addAttribute("Username",  userMapped());
 		model.addAttribute("email",  usuarioService.findByUsername(userMapped()).get().getEmail());
 		
-		return "/show/shows"; /*vista del listado de TODOS los shows (c/ nombre de c/ show debe ser un botón que te lleve a la vista ratingShow)
-		con un botón al lado de la columna network donde diga editar y permita editar nombre y network*/
+		return "/show/shows"; 
 	}
 	
 	@GetMapping("/editShow")
-	public String editShowView(Model model, @RequestParam String idShow) {
+	public String editShow(Model model, @RequestParam String idShow) {
 		
 		model.addAttribute("Username",  userMapped());
 		model.addAttribute("show",showService.findById(Long.parseLong(idShow)).get()); 
-		return "/show/edit";
+		return "/show/editShow";
 	}
 	
-	@PostMapping("/editShow")
-	public RedirectView editShow(Model model, @ModelAttribute Show editShowView) {
+	@PostMapping("/updateShow")
+	public RedirectView updateShow(Model model, @ModelAttribute Show editShowView) {
 		model.addAttribute("Username",  userMapped());
 		System.out.println(editShowView.toString());
-		//showService.update(editShowView);
+		showService.update(editShowView);
 		
 		return new RedirectView("/show/shows");
 	}
@@ -82,41 +81,40 @@ public class ShowController {
 		return new RedirectView("/show/shows");
 	}
 	
-	@GetMapping("/newRating")
-	public String ratingShow(Model model) {
+	@GetMapping("/addRating")
+	public String addRating(Model model) {
 		model.addAttribute("rating", new Rating());
 		model.addAttribute("Username",  userMapped());
-		return "ratingShow"; /*muestra el show seleccionado con el botón (nombre) y es como un edit (además del otro edit propio del show, este 
-		es un tipo edit para agregar el rating por usuario solamente) donde agregas el rating (1 al 5)*/
+		return "/show/ratingShow"; 
 	}
 	
 	@PostMapping("/saveRating")
 	public RedirectView saveRating(Model model, @ModelAttribute Rating ratingView) {
 		model.addAttribute("Username",  userMapped());
 		ratingService.save(ratingView);
-		return new RedirectView("/show/selectedShow"); //sólo guarda el rating y lo manda a la vista selectedShow
+		return new RedirectView("/show/ratings"); 
 	}
 	
-	@GetMapping("/selectedShow")
-	public String ratingsList(Model model) {
+	@GetMapping("/ratings")
+	public String ratings(Model model) {
 		model.addAttribute("Username",  userMapped());
 		model.addAttribute("ratingsList", ratingService.findAll());
-		return "selectedShow"; //muestra el show seleccionado muy anteriormente (en newRating) con todos los ratingssss asignados por usuarios diferentes
+		return "/show/ratings"; 
 	}
 	
 	@GetMapping("/editRating")
-	public String editRatingView(Model model, @RequestParam Long idRating) {
+	public String editRating(Model model, @RequestParam Long idRating) {
 		model.addAttribute("rating", new Rating());
 		model.addAttribute("Username",  userMapped());
 		ratingService.findById(idRating);
 		return "editRating";
 	}
 	
-	@PostMapping("/editRating")
-	public RedirectView editRating(Model model, @ModelAttribute Rating editRatingView) {
+	@PostMapping("/updateRating")
+	public RedirectView updateRating(Model model, @ModelAttribute Rating editRatingView) {
 		ratingService.update(editRatingView);
 		model.addAttribute("Username",  userMapped());
-		return new RedirectView("/show/selectedShow");
+		return new RedirectView("/show/ratings");
 	}
 	
 	@PostMapping("/buscar")

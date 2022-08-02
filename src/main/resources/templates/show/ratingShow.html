@@ -6,7 +6,7 @@
 <!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
         </th:block> /*/-->
 
-<title>Añadir Show</title>
+<title>Añadir Rating</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -20,25 +20,27 @@
 
 
 			<section
-				class=" mt-5 py-4 bg-info bg-light col-12 col-md-8 col-xl-4 border border-success rounded"><h1 class="text-center">Añadir Show</h1>
-				<form th:action="@{/show/saveShow}" method="post"
-					th:object="${show}">
+				class=" mt-5 py-4 bg-info bg-light col-12 col-md-8 col-xl-4 border border-success rounded"><h1 class="text-center">Añadir Rating</h1>
+				<form th:action="@{/show/saveRating}" method="post"
+					th:object="${rating}">
 
-
-					<!-- Show Network -->
 					<div class="form-group py-2">
-						<label>Show Network</label> <input type="text" th:field="*{showNetwork}"
-							class="form-control" id="ShowNetwork" aria-describedby="claveHelp"
-							placeholder="Ingresa el canal?" required>
+						<label>Usuario</label> <input type="text" th:field="*{usuario.email}"
+							class="form-control" id="email" aria-describedby="claveHelp"
+							placeholder="*{usuario.email}" required>
 					</div>
-					<!-- Correo -->
 					<div class="form-group py-2">
-						<label>Show Title</label> <input type="text" th:field="*{showTitle}"
+						<label>Show</label> <input type="text" th:field="*{show.showTitle}"
 							class="form-control" id="showTitle" aria-describedby="claveHelp"
-							placeholder="Ingresa el titulo del show" required>
+							placeholder="*{show.showTitle}" required>
+					</div>
+					<div class="form-group py-2">
+						<label>Rating</label> <input type="number" th:field="*{rating}"
+							class="form-control" id="rating" aria-describedby="claveHelp"
+							placeholder="Ingresar una calificación del 1 al 5" required>
 					</div>
 
-					<button type="submit" class="btn btn-primary">Añadir</button>
+					<button type="submit" class="btn btn-primary">Rating</button>
 				</form>
 			</section>
 		</div>
