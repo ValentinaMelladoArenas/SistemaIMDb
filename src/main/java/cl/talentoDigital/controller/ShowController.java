@@ -73,11 +73,8 @@ public class ShowController {
 	}
 	
 	@GetMapping("/deleteShow")
-	public RedirectView deleteShow(Model model, @RequestParam Long idShow, @ModelAttribute Show deleteShowView) {
-		model.addAttribute("show", new Show());
-		showService.findById(idShow);
-		showService.delete(deleteShowView);
-		model.addAttribute("Username",  userMapped());
+	public RedirectView deleteShow(Model model, @RequestParam String idShow) {
+		showService.delete(Long.parseLong(idShow));
 		return new RedirectView("/show/shows");
 	}
 	

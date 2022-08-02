@@ -4,6 +4,7 @@ package cl.talentoDigital.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,7 +68,29 @@ public class UsuarioController {
 	
 	@PostMapping("/logged/editUsuario")
 	public RedirectView editUsuario(Model model, @ModelAttribute Usuario editUsuarioView) {
-		usuarioService.update(editUsuarioView);
+		
+		Usuario usuarioDB = usuarioService.findByUsername(userMapped()).get();
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		if(encoder.matches(editUsuarioView.getPassword(), usuarioDB.getPassword()) ||  editUsuarioView.getPassword().length()<1 ) {
+			editUsuarioView.setPassword(usuarioDB.getPassword());
+			editUsuarioView.setPasswordConfirmation(usuarioDB.getPasswordConfirmation());
+		}
+		else {
+			editUsuarioView.setPassword(encoder.encode(editUsuarioView.getPassword()));
+			editUsuarioView.setPasswordConfirmation(encoder.encode(editUsuarioView.getPasswordConfirmation()));
+		}
+		
+		usuarioService.update(new Usuario(
+				usuarioDB.getId(),
+				usuarioDB.getUserName(),
+				editUsuarioView.getEmail(),
+				editUsuarioView.getPassword(),
+				editUsuarioView.getPasswordConfirmation(),
+				usuarioDB.getRole(),
+				usuarioDB.isActive()
+				));
 		return new RedirectView("/usuario/logged/usuario");
 	}
 	

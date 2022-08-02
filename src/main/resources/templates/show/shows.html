@@ -20,6 +20,7 @@
 /* } */
 
  </style>
+ 
 <body>
 	
 	
@@ -46,8 +47,9 @@
 					<td th:text="${varStat.index}"></td>
 					<td> <a th:text="${var.showTitle}" th:href="@{/show/ratingShow/(idShow=${var.id})}"></a> </td>
 					<td th:text="${var.showNetwork}"></td>
-					<td><a th:text="Edit" th:href="@{/show/editShow/(idShow=${var.id})}"></a> <a th:text="Delete" th:action="@{/show/deleteShow}" method="get"
-					th:object="${show}" th:href="@{/show/deleteShow/(idShow=${var.id})}"></a></td>
+					<td><a th:text="Edit" class="btn btn-primary btn-sm" role="button" th:href="@{/show/editShow/(idShow=${var.id})}"></a> 
+					<button class="btn btn-danger btn-sm"th:text="Delete"
+					th:object="${show}"  th:onclick="'javascript:deleteShow(\''+ ${var.id} +'\');'"></button></td>
 					
 				<!--	<td><button type="button" class="btn btn-primary">VER</button></td> -->
 				</tr>
@@ -57,8 +59,20 @@
 	
 	
 	
+<script>
+function deleteShow(id) {
+	let isExecuted = confirm("Nooo, a lo bien lo vas a borrar?");
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+	if(isExecuted){
+		window.location.href = "/show/deleteShow/?idShow="+id;
+	}
+	else{
+		return;
+	}
+	}
+</script>	
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   
 </body>
 </html>

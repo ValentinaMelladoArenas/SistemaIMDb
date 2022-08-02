@@ -8,59 +8,75 @@
 
 <title>Iniciar Sesión</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1"></head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 <body>
-	
-	
-	<nav th:insert="fragments/general.html :: nav"> </nav>
-
-	
-
-		<div class="row container mx-auto d-flex justify-content-center">
 
 
-			<section
-				class=" mt-5 py-4 bg-info bg-light col-12 col-md-8 col-xl-4 border border-success rounded">
-		<h1>Edit User</h1>
-			<form th:action="@{/usuario/logged/editUsuario}" method="post" th:object="${Usuario}" th:with="u = ${editUsuario}" >
-				
-				
+	<nav th:insert="fragments/general.html :: nav"></nav>
+
+
+
+	<div class="row container mx-auto d-flex justify-content-center">
+
+
+		<section
+			class=" my-5 py-4 bg-info bg-light col-12 col-md-8 col-xl-4 border border-success rounded">
+			<h1>Edit User</h1>
+			<form th:action="@{/usuario/logged/editUsuario}" method="post"
+				th:object="${Usuario}" th:with="u = ${editUsuario}">
+
+				<!-- ID -->
+				<div class="form-group py-2">
+					<label>Id</label> <input type="text" th:value="${u.id}"
+						class="form-control" id="id" name="id" disabled>
+				</div>
+
 				<!-- Usuario -->
-				<div class="form-group py-2" >
-					<label>Username</label>					
-					<input type="text"  th:value="${u.userName}" class="form-control"
-						id="userName" name="userName" aria-describedby="claveHelp"
-						placeholder="Ingresa tu usuario" required>
+				<div class="form-group py-2">
+					<label>Username</label> <input type="text" th:value="${u.userName}"
+						class="form-control" id="userName" name="userName"
+						aria-describedby="claveHelp" placeholder="Ingresa tu usuario"
+						required>
 				</div>
 				<!-- Correo -->
 				<div class="form-group py-2">
-				<label>Correo</label>
-					<input type="text" name="email" th:value="${u.email}" class="form-control"
-						id="email" aria-describedby="claveHelp"
-						placeholder="Ingresa tu usuario" required>
+					<label>Correo</label> <input type="text" name="email"
+						th:value="${u.email}" class="form-control" id="email"
+						aria-describedby="claveHelp" placeholder="Ingresa tu usuario"
+						required>
 				</div>
-				
-				
+
+				<!-- Role -->
+				<div class="form-group py-2">
+					<label>Role</label> <input type="text" name="role"
+						th:value="${u.role}" class="form-control" id="role"
+						aria-describedby="claveHelp" placeholder="Ingresa tu usuario"
+						disabled>
+				</div>
+
+				<label>Deja los campos vacios si no deseas cambiar la contraseña</label>
 				<!-- Contraseña -->
 				<div class="form-group py-2">
-				<label>New Password</label>
-					<input type="text" name="password" th:value="${u.password}" class="form-control"
-						id="password" aria-describedby="claveHelp"
-						placeholder="Ingresa tu contraseña" required>
+					<label>New Password</label> <input type="text" name="password"
+						 class="form-control" id="password"
+						aria-describedby="claveHelp" placeholder="Ingresa tu contraseña"
+						>
 				</div>
 				<!-- Usuario -->
 				<div class="form-group py-2">
-				<label>Password Confirmation</label>
-					<input type="text" name="passwordConfirmation" th:value="${u.passwordConfirmation}" class="form-control"
-						id="passwordConfirmation" aria-describedby="claveHelp"
-						placeholder="Ingresa tu confirmación de contraseña" required>
+					<label>Password Confirmation</label> <input type="text"
+						name="passwordConfirmation" 
+						class="form-control" id="passwordConfirmation"
+						aria-describedby="claveHelp"
+						placeholder="Ingresa tu confirmación de contraseña" >
 				</div>
-				
-				<button type="submit" class="btn btn-primary">Guardar Cambios</button>
+
+				<button type="submit" class="btn btn-primary">Guardar
+					Cambios</button>
 			</form>
-			</section>
-		</div>
-		
+		</section>
+	</div>
 
 
 
@@ -69,7 +85,11 @@
 
 
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-  
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+
 </body>
 </html>

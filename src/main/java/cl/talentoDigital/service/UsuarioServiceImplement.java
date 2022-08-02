@@ -51,9 +51,9 @@ public class UsuarioServiceImplement implements IUsuarioService, UserDetailsServ
 	@Override
 	public void update(Usuario usuario) {
 
-		String encodedPassword = passwordEncoder.encode(usuario.getPassword());
+
 		
-		dao.save(new Usuario(usuario.getId(), usuario.getUserName(), usuario.getEmail(), encodedPassword, encodedPassword,
+		dao.save(new Usuario(usuario.getId(), usuario.getUserName(), usuario.getEmail(), usuario.getPassword(), usuario.getPasswordConfirmation(),
 				usuario.getRole(), true));
 	}
 
