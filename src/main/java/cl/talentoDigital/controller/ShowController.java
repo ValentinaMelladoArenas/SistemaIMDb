@@ -81,9 +81,11 @@ public class ShowController {
 		return new RedirectView("/show/shows");
 	}
 	
-	@GetMapping("/addRating")
+	@GetMapping("/ratingShow")
 	public String addRating(Model model) {
 		model.addAttribute("rating", new Rating());
+		model.addAttribute("showsList", showService.findAll());
+		model.addAttribute("usersList", usuarioService.findAll());
 		model.addAttribute("Username",  userMapped());
 		return "/show/ratingShow"; 
 	}
@@ -99,6 +101,8 @@ public class ShowController {
 	public String ratings(Model model) {
 		model.addAttribute("Username",  userMapped());
 		model.addAttribute("ratingsList", ratingService.findAll());
+		model.addAttribute("showsList", showService.findAll());
+		model.addAttribute("usersList", usuarioService.findAll());
 		return "/show/ratings"; 
 	}
 	
@@ -109,6 +113,14 @@ public class ShowController {
 		ratingService.findById(idRating);
 		return "editRating";
 	}
+	
+	/*@GetMapping("/editShow")
+	public String editShow(Model model, @RequestParam String idShow) {
+		
+		model.addAttribute("Username",  userMapped());
+		model.addAttribute("show",showService.findById(Long.parseLong(idShow)).get()); 
+		return "/show/editShow";
+	}*/
 	
 	@PostMapping("/updateRating")
 	public RedirectView updateRating(Model model, @ModelAttribute Rating editRatingView) {

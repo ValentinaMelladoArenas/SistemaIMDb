@@ -27,21 +27,18 @@ public class UsuarioController {
 	IUsuarioService usuarioService;
 
 	
-	@GetMapping("/new/newUsuario")
+	@GetMapping("/new/addUsuario")
 	public String addUsuario(Model model) {
 		
 		model.addAttribute("usuario", new Usuario());
 		model.addAttribute("roles",Role.values());
-		return "/usuario/new/newUsuario";
+		return "/usuario/new/addUsuario";
 	}
 	
 	@PostMapping("/new/saveUsuario")
 	public RedirectView saveUsuario(Model model, @ModelAttribute Usuario usuarioView) {
 		
 		usuarioService.save(usuarioView);
-		
-		
-		
 		return new RedirectView("/usuario/logged/usuarios");
 	}
 	
@@ -65,21 +62,13 @@ public class UsuarioController {
 	public String editUsuarioView(Model model) {
 		model.addAttribute("Username", userMapped());
 		model.addAttribute("editUsuario", usuarioService.findByUsername(userMapped()).get());
-		return "usuario/logged/edit";
+		return "usuario/logged/editUsuario";
 	}
 	
 	@PostMapping("/logged/editUsuario")
 	public RedirectView editUsuario(Model model, @ModelAttribute Usuario editUsuarioView) {
-		
-		
-		
-		System.out.println("aaaa");
-		System.out.println(editUsuarioView.getRole());
-		System.out.println(editUsuarioView.toString());
-		
-		
 		usuarioService.update(editUsuarioView);
-		return new RedirectView("/show/shows");
+		return new RedirectView("/usuario/logged/usuario");
 	}
 	
 	@GetMapping("/logged/deleteUsuario")

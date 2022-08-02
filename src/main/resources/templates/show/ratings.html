@@ -43,12 +43,13 @@
 					<th scope="col">Options<th>
 			</thead>
 			<tbody>
-				<tr th:each="var:${ratingList}">
+				<tr th:each="var:${ratingsList}">
 					<td th:text="${varStat.index}"></td>
-					<td th:text="${var.email}"></td>
-					<td th:text="${var.showTitle}"></td>
-					<td><button type="submit" class="btn btn-primary"><a th:href="@{/show/editRating/}"></a>Edit</button>
-					<button type="submit" class="btn btn-primary"><a th:href="@{/show/deleteRating/}"></a>Delete</button></td>
+					<td th:text="${var.show}"></td>
+					<td th:text="${var.show}"></td>
+					<td th:text="${var.rating}"></td>
+					<td><a th:text="Edit" th:href="@{/show/editRating/(idShow=${var.id})}"></a> <a th:text="Delete" th:action="@{/show/deleteRating}" method="get"
+					th:object="${rating}" th:href="@{/show/deleteShow/(idShow=${var.id})}"></a></td>
 					
 				<!--	<td><button type="button" class="btn btn-primary">VER</button></td> -->
 				</tr>

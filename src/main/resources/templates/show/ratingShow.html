@@ -24,16 +24,7 @@
 				<form th:action="@{/show/saveRating}" method="post"
 					th:object="${rating}">
 
-					<div class="form-group py-2">
-						<label>Usuario</label> <input type="text" th:field="*{usuario.email}"
-							class="form-control" id="email" aria-describedby="claveHelp"
-							placeholder="*{usuario.email}" required>
-					</div>
-					<div class="form-group py-2">
-						<label>Show</label> <input type="text" th:field="*{show.showTitle}"
-							class="form-control" id="showTitle" aria-describedby="claveHelp"
-							placeholder="*{show.showTitle}" required>
-					</div>
+	
 					<div class="form-group py-2">
 						<label>Rating</label> <input type="number" th:field="*{rating}"
 							class="form-control" id="rating" aria-describedby="claveHelp"

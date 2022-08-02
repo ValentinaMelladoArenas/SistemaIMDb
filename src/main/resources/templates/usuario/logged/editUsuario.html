@@ -25,14 +25,6 @@
 			<form th:action="@{/usuario/logged/editUsuario}" method="post" th:object="${Usuario}" th:with="u = ${editUsuario}" >
 				
 				
-				<!-- ID -->
-				<div class="form-group py-2" >
-					<label>Id</label>					
-					<input type="text"  th:value="${u.id}" class="form-control"
-						id="id" name="id" aria-describedby="claveHelp"
-						placeholder="" required>
-				</div>
-				
 				<!-- Usuario -->
 				<div class="form-group py-2" >
 					<label>Username</label>					
@@ -48,18 +40,10 @@
 						placeholder="Ingresa tu usuario" required>
 				</div>
 				
-				<!-- Role -->
-				<div class="form-group py-2" >
-				<label>Role</label>
-					<input type="text" name="role"  th:value="${u.role}" class="form-control"
-						id="role" aria-describedby="claveHelp"
-						placeholder="Ingresa tu usuario" >
-				</div>
-				
 				
 				<!-- Contraseña -->
 				<div class="form-group py-2">
-				<label>Password</label>
+				<label>New Password</label>
 					<input type="text" name="password" th:value="${u.password}" class="form-control"
 						id="password" aria-describedby="claveHelp"
 						placeholder="Ingresa tu contraseña" required>
@@ -72,7 +56,7 @@
 						placeholder="Ingresa tu confirmación de contraseña" required>
 				</div>
 				
-				<button type="submit" class="btn btn-primary">Registrar</button>
+				<button type="submit" class="btn btn-primary">Guardar Cambios</button>
 			</form>
 			</section>
 		</div>
