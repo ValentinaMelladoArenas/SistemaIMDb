@@ -19,22 +19,25 @@
 	<div class="row container mx-auto d-flex justify-content-center">
 
 
-			<section
-				class=" mt-5 py-4 bg-info bg-light col-12 col-md-8 col-xl-4 border border-success rounded"><h1 class="text-center">Añadir Rating</h1>
-				<form th:action="@{/show/saveRating}" method="post"
-					th:object="${rating}" >
+		<section
+			class=" mt-5 py-4 bg-info bg-light col-12 col-md-8 col-xl-4 border border-success rounded">
+			<h1 th:text="'Añadir Rating a ' + ${rating.show.showTitle}"></h1>
+			<form th:action="@{/show/saveRating(idShow=${rating.show.id})}" method="post"
+				th:object="${rating}">
 
 
 				<div class="form-group py-2">
-						<label>Rating</label> <input type="number" min=1 max=5 th:field="*{rating}"
-							class="form-control" id="rating" aria-describedby="claveHelp"
-							placeholder="Ingresar una calificación del 1 al 5" required>
-					</div>
+					<label>Rating</label> <input type="number" min=1 max=5
+						th:field="*{rating}" class="form-control" id="rating"
+						aria-describedby="claveHelp"
+						placeholder="Ingresar una calificación del 1 al 5" required>
+				</div>
 
-					<button type="submit" class="btn btn-primary">Rating</button>
-				</form>
-			</section>
-		</div>
+				
+				<button type="submit" class="btn btn-primary">Rating</button>
+			</form>
+		</section>
+	</div>
 
 
 

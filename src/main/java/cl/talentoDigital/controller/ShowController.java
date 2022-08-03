@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import cl.talentoDigital.model.Rating;
 import cl.talentoDigital.model.Show;
+import cl.talentoDigital.model.Usuario;
 import cl.talentoDigital.service.IRatingService;
 import cl.talentoDigital.service.IShowService;
 import cl.talentoDigital.service.IUsuarioService;
@@ -80,17 +81,22 @@ public class ShowController {
 	
 	@GetMapping("/ratingShow")
 	public String addRating(Model model, @RequestParam String idShow) {
-		model.addAttribute("rating", new Rating());
-		model.addAttribute("usuario", usuarioService.findByUsername(userMapped()));
-		model.addAttribute("showId",  idShow);
-		model.addAttribute("Username", userMapped() );
+		model.addAttribute("Username", userMapped());
+		
+		Usuario usuarioRating = usuarioService.findByUsername(userMapped()).get();
+		Show showRated = showService.findById(Long.parseLong(idShow)).get();
+
+		model.addAttribute("rating", new Rating(null, 1, usuarioRating,showRated));
+		
 		return "/show/ratingShow"; 
 	}
 	
 	@PostMapping("/saveRating")
-	public RedirectView saveRating(Model model, @ModelAttribute Rating ratingView) {
+	public RedirectView saveRating(Model model, @ModelAttribute Rating ratingView,@RequestParam String idShow) {
 		model.addAttribute("Username",  userMapped());
-		ratingService.save(ratingView);
+		Usuario usuarioRating = usuarioService.findByUsername(userMapped()).get();
+		Show showRated = showService.findById(Long.parseLong(idShow)).get();
+		ratingService.save(new Rating(null,ratingView.getRating() , usuarioRating,showRated));
 		return new RedirectView("/show/ratings"); 
 	}
 	
