@@ -1,6 +1,0 @@
-// QUEDA PENDIENTE, VERIFICAR QUE SOLO SE PUEDA COLOCAR UN SOLO RATING EN UN SOLO SHOW.
-
-bye
-
-Hello from the other side
-Chaito del otro lao
