@@ -45,8 +45,8 @@
 			<tbody>
 				<tr th:each="var:${ratingsList}">
 					<td th:text="${varStat.index}"></td>
-					<td th:text="${var.rating.usuario.email}"></td>
-					<td th:text="${var.rating.show.showTitle}"></td>
+					<td th:text="${var.user.email}"></td>
+					<td th:text="${var.show.showTitle}"></td>
 					<td th:text="${var.rating}"></td>
 
 					<td><a th:text="Edit" th:href="@{/show/editRating/(idShow=${var.id})}"></a> <a th:text="Delete" th:action="@{/show/deleteRating}" method="get"

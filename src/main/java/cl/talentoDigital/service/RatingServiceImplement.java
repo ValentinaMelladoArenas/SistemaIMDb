@@ -1,6 +1,7 @@
 package cl.talentoDigital.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,8 @@ public class RatingServiceImplement implements IRatingService {
 	}
 
 	@Override
-	public void findById(Long idRating) {
-		dao.findById(idRating);
+	public Optional<Rating> findById(Long idRating) {
+		return dao.findById(idRating);
 	}
 
 }

@@ -2,7 +2,7 @@ package cl.talentoDigital.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-@SequenceGenerator(name="SQ_USER", initialValue=1, allocationSize=1)
+@SequenceGenerator(name="SQ_USUARIO", initialValue=1, allocationSize=1)
 public class Usuario implements Serializable{
 
 	/**
@@ -20,7 +20,7 @@ public class Usuario implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="SQ_USER")
+	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="SQ_USUARIO")
 	private Long id;
 	private String userName;
 	private String email;

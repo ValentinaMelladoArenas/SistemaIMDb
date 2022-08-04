@@ -104,8 +104,6 @@ public class ShowController {
 	public String ratings(Model model) {
 		model.addAttribute("Username",  userMapped());
 		model.addAttribute("ratingsList", ratingService.findAll());
-		model.addAttribute("showsList", showService.findAll());
-		model.addAttribute("usersList", usuarioService.findAll());
 		return "/show/ratings"; 
 	}
 	
