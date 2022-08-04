@@ -1,12 +1,6 @@
 package cl.talentoDigital.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
 @Entity
 @SequenceGenerator(name="SQ_RATING", initialValue=1, allocationSize=1)
@@ -17,11 +11,11 @@ public class Rating {
 	private Long id;
 	private int rating;
 	
-	@ManyToOne
+	@ManyToOne(cascade= {CascadeType.ALL})
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
 	private Usuario usuario;
 	
-	@ManyToOne
+	@ManyToOne(cascade= {CascadeType.ALL})
 	@JoinColumn(name = "show_id", referencedColumnName = "id")
 	private Show show;
 	

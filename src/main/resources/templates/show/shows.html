@@ -40,14 +40,16 @@
 					<th scope="col">#</th>
 					<th scope="col">Title</th>
 					<th scope="col">Network</th>
-					<th scope="col">Options<th>
+					<th scope="col">Options</th>
+				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="var:${showsList}">
 					<td th:text="${varStat.index}"></td>
-					<td> <a th:text="${var.showTitle}" th:href="@{/show/ratingShow/(idShow=${var.id})}"></a> </td>
+					<td th:text="${var.showTitle}"></td>
 					<td th:text="${var.showNetwork}"></td>
-					<td><a th:text="Edit" class="btn btn-primary btn-sm" role="button" th:href="@{/show/editShow/(idShow=${var.id})}"></a> 
+					<td><a th:text="Edit" class="btn btn-primary btn-sm" role="button" th:href="@{/show/editShow/(idShow=${var.id})}"></a>
+					<a th:text="Rate" class="btn btn-primary btn-sm" role="button" th:href="@{/show/ratingShow/(idShow=${var.id})}"></a>
 					<button class="btn btn-danger btn-sm"th:text="Delete"
 					th:object="${show}"  th:onclick="'javascript:deleteShow(\''+ ${var.id} +'\');'"></button></td>
 					

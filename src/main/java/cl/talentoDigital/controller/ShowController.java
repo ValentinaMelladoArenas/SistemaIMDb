@@ -86,9 +86,7 @@ public class ShowController {
 		Usuario usuarioRating = usuarioService.findByUsername(userMapped()).get();
 		Show showRated = showService.findById(Long.parseLong(idShow)).get();
 		
-		// BUscar si este usuario ya calificó esta wea
-		
-		
+	
 		boolean existe = ratingService.findUsuarioRating(usuarioRating.getId(), showRated.getId());
 		
 		if (existe==true) {
@@ -124,25 +122,20 @@ public class ShowController {
 	}
 	
 	@GetMapping("/editRating")
-	public String editRating(Model model, @RequestParam Long idRating) {
+	public String editRating(Model model, @RequestParam String idRating) {
 		model.addAttribute("rating", new Rating());
 		model.addAttribute("Username",  userMapped());
-		ratingService.findById(idRating);
-		return "editRating";
+		ratingService.findById(Long.parseLong(idRating));
+		return "/show/editRating";
 	}
 	
-	/*@GetMapping("/editShow")
-	public String editShow(Model model, @RequestParam String idShow) {
-		
-		model.addAttribute("Username",  userMapped());
-		model.addAttribute("show",showService.findById(Long.parseLong(idShow)).get()); 
-		return "/show/editShow";
-	}*/
 	
 	@PostMapping("/updateRating")
-	public RedirectView updateRating(Model model, @ModelAttribute Rating editRatingView) {
-		ratingService.update(editRatingView);
+	public RedirectView updateRating(Model model, @ModelAttribute Rating editRatingView, @RequestParam String idShow) {
 		model.addAttribute("Username",  userMapped());
+		Usuario usuarioRating = usuarioService.findByUsername(userMapped()).get();
+		Show showRated = showService.findById(Long.parseLong(idShow)).get();
+		ratingService.update(new Rating(editRatingView.getId(), editRatingView.getRating() ,usuarioRating, showRated));
 		return new RedirectView("/show/ratings");
 	}
 	
