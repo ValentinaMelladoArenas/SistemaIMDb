@@ -35,4 +35,15 @@ public class RatingServiceImplement implements IRatingService {
 		return dao.findById(idRating);
 	}
 
+	@Override
+	public boolean findUsuarioRating(Long showId, Long usuarioId) {
+		
+			Rating rate = dao.findByShowIdAndUsuarioId(showId, usuarioId);
+			
+			if(rate!=null) {
+				return true;
+			}
+		return false;
+	}
+
 }

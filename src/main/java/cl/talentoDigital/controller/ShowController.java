@@ -85,10 +85,26 @@ public class ShowController {
 		
 		Usuario usuarioRating = usuarioService.findByUsername(userMapped()).get();
 		Show showRated = showService.findById(Long.parseLong(idShow)).get();
-
-		model.addAttribute("rating", new Rating(null, 1, usuarioRating,showRated));
 		
-		return "/show/ratingShow"; 
+		// BUscar si este usuario ya calificó esta wea
+		
+		
+		boolean existe = ratingService.findUsuarioRating(usuarioRating.getId(), showRated.getId());
+		
+		if (existe==true) {
+			model.addAttribute("showsList", showService.findAll());
+			model.addAttribute("Username",  userMapped());
+			model.addAttribute("email",  usuarioService.findByUsername(userMapped()).get().getEmail());
+			return "/show/shows";
+		}
+		else {
+			
+			model.addAttribute("rating", new Rating(null, 1, usuarioRating,showRated));
+		
+			return "/show/ratingShow";
+		}
+		
+
 	}
 	
 	@PostMapping("/saveRating")
