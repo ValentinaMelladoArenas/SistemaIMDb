@@ -25,19 +25,19 @@
 			<section
 				class=" mt-5 py-4 bg-info bg-light col-12 col-md-8 col-xl-4 border border-success rounded">
 				<h1 class="text-center">Editar Rating</h1>
-				<form th:action="@{/show/updateRating(idRating=${rating.id})}" method="post"
+				<form th:action="@{/show/updateRating/(idRating=${rating.id},idShow=${rating.show.id})}" method="post"
 					th:object="${rating}">
 
 					<div class="form-group py-2">
-						<input type="hidden" 
-							class="form-control" name="id" id="id"  th:field="*{id}" th:value="${rating.id}"
+						<input type="text" 
+							class="form-control" name="id" id="id"  th:field="*{id}"	
 							 readonly >
 					</div>
 
 					<div class="form-group py-2">
 						<label>Rating</label> <input type="number"
 							th:field="*{rating}" class="form-control" name="rating" min=1 max=5
-							id="rating" aria-describedby="claveHelp" th:value="${rating.rating}"
+							id="rating" aria-describedby="claveHelp" 
 							placeholder="" required>
 					</div>
 

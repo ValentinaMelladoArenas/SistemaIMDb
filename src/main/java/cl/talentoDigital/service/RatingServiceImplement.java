@@ -36,14 +36,24 @@ public class RatingServiceImplement implements IRatingService {
 	}
 
 	@Override
-	public boolean findUsuarioRating(Long showId, Long usuarioId) {
+	public boolean findByUsuarioAndShow(Long usuarioId, Long  showId) {
 		
-			Rating rate = dao.findByShowIdAndUsuarioId(showId, usuarioId);
+			Rating rate = dao.findByUsuarioIdAndShowId(usuarioId,showId);
 			
-			if(rate!=null) {
+			
+			if(rate==null) {
+				return false;
+			}
+			else {
 				return true;
 			}
-		return false;
+		
+	}
+
+	@Override
+	public void deleteByShowId(Long showId) {
+		dao.deleteByShowId(showId);
+		
 	}
 
 }

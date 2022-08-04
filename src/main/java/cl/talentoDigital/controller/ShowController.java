@@ -2,6 +2,8 @@ package cl.talentoDigital.controller;
 
 
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +23,7 @@ import cl.talentoDigital.service.IRatingService;
 import cl.talentoDigital.service.IShowService;
 import cl.talentoDigital.service.IUsuarioService;
 
+@Transactional 
 @Controller
 @RequestMapping("/show")
 public class ShowController {
@@ -75,7 +78,9 @@ public class ShowController {
 	
 	@GetMapping("/deleteShow")
 	public RedirectView deleteShow(Model model, @RequestParam String idShow) {
-		showService.delete(Long.parseLong(idShow));
+		
+	//	ratingService.deleteByShowId(Long.parseLong(idShow));
+		showService.deleteById(Long.parseLong(idShow));
 		return new RedirectView("/show/shows");
 	}
 	
@@ -86,14 +91,15 @@ public class ShowController {
 		Usuario usuarioRating = usuarioService.findByUsername(userMapped()).get();
 		Show showRated = showService.findById(Long.parseLong(idShow)).get();
 		
-	
-		boolean existe = ratingService.findUsuarioRating(usuarioRating.getId(), showRated.getId());
+		
+		boolean existe = ratingService.findByUsuarioAndShow(usuarioRating.getId(),showRated.getId());
 		
 		if (existe==true) {
 			model.addAttribute("showsList", showService.findAll());
 			model.addAttribute("Username",  userMapped());
 			model.addAttribute("email",  usuarioService.findByUsername(userMapped()).get().getEmail());
 			return "/show/shows";
+			
 		}
 		else {
 			
@@ -123,19 +129,25 @@ public class ShowController {
 	
 	@GetMapping("/editRating")
 	public String editRating(Model model, @RequestParam String idRating) {
-		model.addAttribute("rating", new Rating());
+		
+		
+		model.addAttribute("rating", ratingService.findById(Long.parseLong(idRating)).get());
 		model.addAttribute("Username",  userMapped());
-		ratingService.findById(Long.parseLong(idRating));
+		
 		return "/show/editRating";
 	}
 	
 	
 	@PostMapping("/updateRating")
-	public RedirectView updateRating(Model model, @ModelAttribute Rating editRatingView, @RequestParam String idShow) {
-		model.addAttribute("Username",  userMapped());
+	public RedirectView updateRating(Model model, @ModelAttribute Rating editRatingView, @RequestParam String idRating, @RequestParam String idShow) {
+		model.addAttribute("Username",  userMapped());	
+		
+		
 		Usuario usuarioRating = usuarioService.findByUsername(userMapped()).get();
 		Show showRated = showService.findById(Long.parseLong(idShow)).get();
-		ratingService.update(new Rating(editRatingView.getId(), editRatingView.getRating() ,usuarioRating, showRated));
+		
+		
+		ratingService.update(new Rating(Long.parseLong(idRating), editRatingView.getRating() ,usuarioRating, showRated));
 		return new RedirectView("/show/ratings");
 	}
 	

@@ -11,11 +11,11 @@ public class Rating {
 	private Long id;
 	private int rating;
 	
-	@ManyToOne(cascade= {CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
 	private Usuario usuario;
 	
-	@ManyToOne(cascade= {CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn(name = "show_id", referencedColumnName = "id")
 	private Show show;
 	

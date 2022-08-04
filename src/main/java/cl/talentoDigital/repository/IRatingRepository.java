@@ -6,6 +6,8 @@ import cl.talentoDigital.model.Rating;
 
 public interface IRatingRepository extends CrudRepository<Rating, Long> {
 	
-	Rating findByShowIdAndUsuarioId(Long id, Long userId);
+	Rating findByUsuarioIdAndShowId(Long usuarioId, Long showId);
+	void deleteByShowId(Long showId);
+
 
 }

@@ -1,15 +1,8 @@
 package cl.talentoDigital.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
-
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 
 @Entity
 @SequenceGenerator(name="SQ_USUARIO", initialValue=1, allocationSize=1)
@@ -30,6 +23,8 @@ public class Usuario implements Serializable{
 	
     @Enumerated(EnumType.STRING)
 	private Role role;
+    
+    
     
 
 	public Usuario() {

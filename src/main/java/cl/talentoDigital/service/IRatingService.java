@@ -11,5 +11,6 @@ public interface IRatingService {
 	public void save(Rating rating);
 	public void update(Rating rating);
 	public Optional<Rating> findById(Long idRating);
-	public boolean findUsuarioRating(Long showId, Long usuarioId);
+	public boolean findByUsuarioAndShow(Long usuarioId, Long showId);
+	public void deleteByShowId(Long showId);
 }

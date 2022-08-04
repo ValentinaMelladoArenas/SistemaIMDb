@@ -21,8 +21,8 @@
 
 			<section
 				class=" mt-5 py-4 bg-info bg-light col-12 col-md-8 col-xl-4 border border-success rounded"><h1 class="text-center">Register</h1>
-				<form th:action="@{/usuario/new/saveUsuario}" method="post"
-					th:object="${usuario}">
+				<form th:action="@{/usuario/new/saveUsuario}" method="post" 	th:object="${usuario}" 
+				oninput='passwordConfirmacion.setCustomValidity(password.value != passwordConfirmacion.value ? "Passwords do not match." : "")'>
 
 
 					<!-- Usuario -->
@@ -33,7 +33,7 @@
 					</div>
 					<!-- Correo -->
 					<div class="form-group py-2">
-						<label>Correo</label> <input type="text" th:field="*{email}"
+						<label>Correo</label> <input type="email" th:field="*{email}"
 							class="form-control" id="email" aria-describedby="claveHelp"
 							placeholder="Ingresa tu usuario" required>
 					</div>
@@ -47,21 +47,22 @@
 					<!-- Password -->
 					<div class="form-group py-2">
 						<label>Password</label> <input type="password" th:field="*{password}"
-							class="form-control" id="password" aria-describedby="claveHelp"
+							class="form-control" id="password" aria-describedby="claveHelp" name="password"
 							placeholder="Ingresa tu contraseña" required>
 					</div>
 					<!-- Confirmacion -->
 					<div class="form-group py-2">
 						<label>Password Confirmation</label> <input type="password"
-							th:field="*{passwordConfirmation}" class="form-control"
-							id="passwordConfirmation" aria-describedby="claveHelp"
+							th:field="*{passwordConfirmation}" class="form-control" name="passwordConfirmacion"
+							id="passwordConfirmacion" aria-describedby="claveHelp"
 							placeholder="Ingresa tu confirmación de contraseña" required>
 					</div>
 
-					<button type="submit" class="btn btn-primary">Registrar</button>
+					<button onsubmit="event.preventDefault();" class="btn btn-primary">Registrar</button>
 				</form>
 			</section>
 		</div>
+
 
 
 

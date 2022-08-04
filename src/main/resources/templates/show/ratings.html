@@ -15,8 +15,7 @@
 	
 	
 
-	<h2>TV Shows</h2>
-	<h2 th:text="${email}">TV Shows</h2>
+	<h1 class="text-center my-2">TV Shows</h1>
 	
 <div class="container">
 		<table class="table table-responsible table-dark table-striped" >
@@ -35,7 +34,7 @@
 					<td th:text="${var.user.email}"></td>
 					<td th:text="${var.show.showTitle}"></td>
 					<td th:text="${var.rating}"></td>
-					<td><a role="button" class="btn btn-primary btn-sm" th:text="Edit" th:href="@{/show/editRating/}"></a></td>
+					<td><a role="button" class="btn btn-primary btn-sm" th:text="Edit" th:href="@{/show/editRating/(idRating=${var.id})}"></a></td>
 					</tr>
 			</tbody>
 		</table>

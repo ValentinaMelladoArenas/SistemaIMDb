@@ -24,7 +24,7 @@
 			class=" my-5 py-4 bg-info bg-light col-12 col-md-8 col-xl-4 border border-success rounded">
 			<h1>Edit User</h1>
 			<form th:action="@{/usuario/logged/editUsuario}" method="post"
-				th:object="${Usuario}" th:with="u = ${editUsuario}">
+				th:object="${Usuario}" th:with="u = ${editUsuario}" oninput='passwordConfirmacion.setCustomValidity(password.value != passwordConfirmacion.value ? "Passwords do not match." : "")'>
 
 				<!-- ID -->
 				<div class="form-group py-2">
@@ -66,18 +66,17 @@
 				<!-- Usuario -->
 				<div class="form-group py-2">
 					<label>Password Confirmation</label> <input type="password"
-						name="passwordConfirmation" 
-						class="form-control" id="passwordConfirmation"
+						name="passwordConfirmacion" 
+						class="form-control" id="passwordConfirmacion"
 						aria-describedby="claveHelp"
 						placeholder="Ingresa tu confirmación de contraseña" >
 				</div>
 
-				<button type="submit" class="btn btn-primary">Guardar
+				<button onsubmit="event.preventDefault();" class="btn btn-primary">Guardar
 					Cambios</button>
 			</form>
 		</section>
 	</div>
-
 
 
 

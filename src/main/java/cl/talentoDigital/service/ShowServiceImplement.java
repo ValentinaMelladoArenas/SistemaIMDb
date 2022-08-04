@@ -21,7 +21,9 @@ public class ShowServiceImplement implements IShowService {
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void deleteById(Long id) {
+
+		
 		dao.deleteById(id);
 	}
 

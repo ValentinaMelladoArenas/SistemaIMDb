@@ -1,10 +1,17 @@
 package cl.talentoDigital.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @SequenceGenerator(name="SQ_SHOW", initialValue=1, allocationSize=1)
@@ -16,6 +23,11 @@ public class Show {
 	private String showTitle;
 	private String showNetwork;
 	
+	 @OneToMany(cascade= {CascadeType.REMOVE},mappedBy="rating",orphanRemoval=true)
+	 @OnDelete(action = OnDeleteAction.CASCADE)
+	 private List<Rating> ratings;
+	
+	 
 	public Show() {
 	}
 
